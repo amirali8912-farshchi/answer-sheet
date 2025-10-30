@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang=Fa>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>answer sheet maker</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand(); // تمام‌صفحه
+  </script>
+
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+  <style>
+  body,button{font-family: 'Vazir', sans-serif;background-color: rgb(44, 139, 139);}
+  table,
+  td,
+  tr {
+  border: 0px solid rgb(0, 0, 0);
+  width:100vw
+
+  }
+  tr {height :25vh}
+  .p{font-size:4vw;}
+   /*.custom-radio {
+          position: relative;
+          padding-left: 30px;
+          cursor: pointer;
+          font-size: 4vw;
+          display: inline-block;
+          user-select: none;
+        }
+        
+        .custom-radio input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+        }
+
+        .custom-radio .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 22px;
+          width: 22px;
+          background-color: #eee;
+          border-radius: 50%;
+          border: 1px solid rgb(20, 97, 58) 
+        }
+        
+        .custom-radio input:checked ~ .checkmark {
+          background-color: rgb(20, 97, 58);
+        }
+        
+
+        .custom-radio .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+        }
+        
+      
+        .custom-radio input:checked ~ .checkmark:after {
+          display: block;
+        }
+
+        .custom-radio .checkmark:after {
+          top: 7px;
+          left: 7px;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: white;
+        }*/
+  </style>
+</head>
+
+<body align="ltr">
+  <form action="/generate/" method="POST">
+    {% csrf_token %}
+    <table align="center" style="width: 90vw;height: 90vh;">
+      <tr>
+        <td align="right"><input type='number' style='height:10vh ;width:30vw; font-size: 7vh;background:#00ff9f;' name="test_count"></td>
+        <td style=" width: 60vw;font-size:7vh;height:10vh ;" align="left" class="p">تعداد تست</td>
+
+      </tr>
+      <!-- <tr>
+        <td colspan=2 align="center" class='p'>
+
+
+          <label class="custom-radio"> نمایش در مرورگر
+            <input type="radio" name="mode" value="view">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="custom-radio"> دانلود فایل
+            <input type="radio" name="mode" value="download">
+            <span class="checkmark"></span>
+          </label>
+
+      </tr> -->
+      <tr>
+        <td colspan=2 align='center' style="height: 25vh;" class='p'>
+          <button type="submit" style="width: 50vh;height : 25vh">
+            <p style="font-style: A Dast Nevis;font-size:7vh">تولید پاسخبرگ</p>
+          </button>
+        </td>
+      </tr>
+
+    </table>
+
+  </form>
+
+</body>
+
+</html>
