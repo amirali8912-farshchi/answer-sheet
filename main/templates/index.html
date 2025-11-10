@@ -22,7 +22,11 @@
   <form action="/generate/" method="POST">
     {% csrf_token %}
     <div class="test">
-      <p class="p">تعداد تست</p>
+      <p class="p">شروع تست</p>
+      <input type='number' class="input" name="start">
+    </div>
+    <div class="test">
+      <p class="p">پایان تست</p>
       <input type='number' class="input" name="test_count">
     </div>
 
