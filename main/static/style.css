@@ -1,0 +1,91 @@
+body {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background: linear-gradient(to right,#ff67aa,#34aacc); */
+    background: #191919;
+}
+
+form {
+    width: 50%;
+    padding: 20px;
+    height: 75%;
+    background-color: rgba(05, 05, 05, 0.75);
+    display: flex;
+    flex-direction: column;
+    /* justify-items: ; */
+    /* flex-flow: ; */
+    justify-content: space-around;
+    border-radius: 40px;
+
+
+
+}
+
+.test {
+
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.p {
+    font-style: Shabnam;
+    color: #dbdbdb;
+    font-size: x-large;
+}
+
+.test .input {
+    width: 9rem;
+    font-size: 2rem;
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(300px);
+    border-radius: 30px;
+}
+
+.btn {
+    font-size: 2rem;
+    background-color: rgba(155, 255, 155, 0.5) !important;
+    backdrop-filter: blur(300px);
+    border: 30px;
+}
+
+.radio{
+    appearance: none;
+
+    -webkit-appearance: none;
+    /* برای سافاری */
+    width: 20px;
+    height: 20px;
+    border: 2px solid #555;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #90ff70;
+    position: relative;
+}
+
+
+.radio:checked {
+    background-color: #4caf50;
+    border-color: #4caf50;
+}
+
+.radio:checked::after {
+    content: "✔";
+    color: white;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+
+@media only screen and (max-width:992) {
+    
+}
