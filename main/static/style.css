@@ -33,21 +33,25 @@ form {
 }
 
 .p {
-    font-style: Shabnam;
-    color: #dbdbdb;
+    font-family: Shabnam;
     font-size: x-large;
+    color: #dbdbdb;
 }
 
 .test .input {
     width: 9rem;
+    color: white;
     font-size: 2rem;
-    background-color: rgba(255, 255, 255, 0.5) !important;
+    background-color: rgba(255, 255, 255, 0.225) !important;
     backdrop-filter: blur(300px);
     border-radius: 30px;
 }
 
 .btn {
-    font-size: 2rem;
+    font-family: Shabnam;
+    font-size: x-large;
+
+    /* font-size: 2rem; */
     background-color: rgba(155, 255, 155, 0.5) !important;
     backdrop-filter: blur(300px);
     border: 30px;
@@ -55,7 +59,7 @@ form {
     /* all:unset */
 }
 
-.radio{
+.radio {
     appearance: none;
 
     -webkit-appearance: none;
@@ -89,8 +93,8 @@ form {
 
 
 @media only screen and (max-width:992px) {
-    form{
+    form {
         width: 90%;
     }
-    
+
 }

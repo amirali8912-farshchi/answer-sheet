@@ -16,6 +16,7 @@ def generate_answer_sheet(request):
     
     if request.method == "POST":
         start = int(request.POST.get('start'))
+        name = str(request.POST.get('name'))
         def a(a):
             if start <a:
                 return True
@@ -203,14 +204,19 @@ def generate_answer_sheet(request):
 
                         text_lines.append(True)
                             # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            if y % 2 == 0:
-                e = f'''{y}. ① ② ③ ④                                       '''
-                text_lines.append(e)
+            if start % 2 == 1 :
+                if y %2 ==1:
+                    e = f'''{y}. ① ② ③ ④                                       '''
+                    text_lines.append(e)
+            else:
+                if y % 2 == 0:
+                    e = f'''{y}. ① ② ③ ④                                       '''
+                    text_lines.append(e)
 
-                if n % 65 == 0 or (n + 1) % 65 == 0:
+                    if n % 65 == 0 or (n + 1) % 65 == 0:
 
-                    text_lines.append(True)
-        
+                        text_lines.append(True)
+            
         from http.server import BaseHTTPRequestHandler, HTTPServer
         from io import BytesIO
         from reportlab.pdfgen import canvas
@@ -223,106 +229,99 @@ def generate_answer_sheet(request):
         
         
         
-        a=Font.objects.all()
-        for i in a:
-            a=i.data_b64
-        font_bytes = BytesIO(base64.b64decode(a))
-        # ثبت فونت
-        pdfmetrics.registerFont(TTFont('Vazir', font_bytes))
+        # a=Font.objects.all()
+        # for i in a:
+        #     a=i.data_b64
+        # font_bytes = BytesIO(base64.b64decode(a))
+        # # ثبت فونت
+        # pdfmetrics.registerFont(TTFont('Vazir', font_bytes))
 
-        # ایجاد PDF در حافظه
+        # # ایجاد PDF در حافظه
+        # buffer = BytesIO()
+        # c = canvas.Canvas(buffer, pagesize=(595, 842))  # A4
+        # c.setFont("Vazir", 14)
+        # y = 750
+        #  # موقعیت عمودی شروع متن
+        # for line in text_lines:
+        #     if line == True:
+        #         y = 750
+        #         c.showPage()
+        #         c.setFont("Vazir", 14)
+        #     else:
+        #         c.drawString(80, y, line)
+        #         y -= 20 # فاصله بین خطوط
+        #     # --- قاب در اطراف صفحه ---
+        #     margin = 20
+        #     c.setLineWidth(3)
+        #     c.setStrokeColorRGB(0.2, 0.2, 0.2)  # خاکستری تیره
+        #     c.rect(margin, margin, width - 2 * margin, height - 2 * margin)
+
+        #     # --- واترمارک ---
+        #     c.saveState()
+        #     c.setFont("Helvetica-Bold", 60)
+        #     c.setFillColorRGB(0.9, 0.9, 0.9)  # خیلی روشن
+        #     c.translate(width / 2, height / 2)
+        #     c.rotate(45)
+        #     c.drawCentredString(0, 0, "CONFIDENTIAL")
+        #     c.restoreState()
+
+
+        # c.showPage()
+        # c.save()
+        # buffer.seek(0)
+        # response = HttpResponse(buffer, content_type='application/pdf')
+        # response['Content-Disposition'] = 'inline; filename="answer_sheet.pdf"'  # نمایش در مرورگر
+        # return response
+        a = Font.objects.all()
+        for i in a:
+            font_b64 = i.data_b64
+        font_bytes = BytesIO(base64.b64decode(font_b64))
+        pdfmetrics.registerFont(TTFont('Vazir', font_bytes))
+        # تنظیمات صفحه
+        width, height = (595, 842)  # A4
         buffer = BytesIO()
-        c = canvas.Canvas(buffer, pagesize=(595, 842))  # A4
+        c = canvas.Canvas(buffer, pagesize=(width, height))
+        draw_frame_and_watermark(c, width, height,name)
+                
         c.setFont("Vazir", 14)
         y = 750
-         # موقعیت عمودی شروع متن
+        # فرض کنیم text_lines از قبل تعریف شده
         for line in text_lines:
-            if line == True:
-                y = 750
+            if line is True:  # جداکننده‌ی صفحه جدید
+                # قاب و واترمارک صفحه فعلی
                 c.showPage()
+                draw_frame_and_watermark(c, width, height,name)
                 c.setFont("Vazir", 14)
+                y = 750
             else:
                 c.drawString(80, y, line)
-                y -= 20 # فاصله بین خطوط
-
+                y -= 20
+        # آخرین صفحه هم قاب و واترمارک بگیرد
         c.showPage()
+        draw_frame_and_watermark(c, width, height,name)
         c.save()
         buffer.seek(0)
         response = HttpResponse(buffer, content_type='application/pdf')
-        response['Content-Disposition'] = 'inline; filename="answer_sheet.pdf"'  # نمایش در مرورگر
+        response['Content-Disposition'] = 'inline; filename="answer_sheet.pdf"'
         return response
-        # سرور HTTP موقت
-        # class PDFHandler(BaseHTTPRequestHandler):
-        #     def do_GET(self):
-        #         self.send_response(200)
-        #         self.send_header('Content-type', 'application/pdf')
-        #         self.end_headers()
-        #         self.wfile.write(buffer.getvalue())
-
-        # server = HTTPServer(('localhost', 1234), PDFHandler)
-        # webbrowser.open("http://localhost:1234")
-        # server.serve_forever()
-        # import time
-        # time.sleep(6)
-        # server.shotdown()
 
 
+def draw_frame_and_watermark(c, width, height,a):
+    # --- قاب ---
+    margin = 20
+    c.setLineWidth(3)
+    c.setStrokeColorRGB(0.2, 0.2, 0.2)
+    c.rect(margin, margin, width - 2 * margin, height - 2 * margin)
 
-
-
-
-
-
-#        filename = request.POST.get("filename", "answer_sheet")
-#
-#        # اعتبارسنجی
-#        if not test_count or not test_count.isdigit():
-#            return HttpResponse("تعداد تست نامعتبر است", status=400)
-#
-#        y = int(test_count)
-#
-#        # ساخت فایل PDF در حافظه
-#        buffer = BytesIO()
-#        p = canvas.Canvas(buffer, pagesize=A4)
-#        width, height = A4
-#
-#        p.setFont("Helvetica", 12)
-#        p.drawString(200, height - 50, "پاسخ‌برگ")
-#
-#        x_left = 50
-#        x_right = 300
-#        y_pos = height - 100
-#        step = 40  # فاصله بین ردیف‌ها
-#
-#        for i in range(1, y + 1, 2):
-#            # شماره و گزینه‌ها در سمت چپ
-#            p.drawString(x_left, y_pos, f'''{i}. ① ② ③ ④
-#    ................................
-#    ................................
-#    ................................
-#    ''')
-#            if i + 1 <= y:
-#                # شماره و گزینه‌ها در سمت راست
-#                p.drawString(x_right, y_pos, f'''{i+1}. ① ② ③ ④
-#    ................................
-#    ................................
-#    ................................
-#    ''')
-#
-#            y_pos -= step
-#            if y_pos < 50:  # اگه صفحه پر شد برو صفحه بعد
-#                p.showPage()
-#                p.setFont("Helvetica", 12)
-#                y_pos = height - 50
-#
-#        p.save()
-#
-#        buffer.seek(0)
-#
-#        # نمایش مستقیم PDF در مرورگر (بدون دانلود اجباری)
-#        return HttpResponse(buffer, content_type="application/pdf")
-#
-
+    # --- واترمارک ---
+    c.saveState()
+    c.setFont("Helvetica-Bold", 60)
+    c.setFillColorRGB(0.85, 0.85, 0.85)
+    c.translate(width / 2, height / 2)
+    c.rotate(43)
+    c.drawCentredString(0, 0, "answer-sheet.liara.run")
+    c.drawCentredString(50, 57, a)
+    c.restoreState()
 
 
 
