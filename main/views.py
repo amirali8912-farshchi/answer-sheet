@@ -396,27 +396,87 @@ def draw_frame_and_watermark(c, width, height,a):
     c.rect(margin, margin, width - 2 * margin, height - 2 * margin)
 
     # --- واترمارک ---
+    
+    import arabic_reshaper
+    from bidi.algorithm import get_display
+    import re
+
+    def is_persian(text):
+        return bool(re.search(r'[\u0600-\u06FF]', text))
+
+    text = a   # یا مثلاً: CONFIDENTIAL
+
+    if is_persian(text):
+        reshaped_text = arabic_reshaper.reshape(text)
+        final_text = get_display(reshaped_text)
+    else:
+        final_text = text
     c.saveState()
     c.setFont("asd", 60)
-    c.setFillColorRGB(0.85, 0.85, 0.85)
+    c.setFillColorRGB(0.65, 0.65, 0.65)
     c.translate(width / 2, height / 2)
     c.rotate(43)
     c.drawCentredString(0, 0, "answer-sheet.liara.run")
-    c.drawCentredString(50, 57, a)
+    c.drawCentredString(50, 60, final_text)
     c.restoreState()
     c.setFont("Vazir", 16)
 
 
 
-from django.conf import settings
-import os
-from .models import Font
-from django.shortcuts import redirect
-def a(request):
-    import base64
-    with open("C:\\Users\\1\\Desktop\\Almarai-Light.ttf", "rb") as f:
-        font_data = f.read()
 
-    font_b64 = base64.b64encode(font_data).decode("utf-8")
-    Font.objects.create(data_b64=font_b64)
-    return redirect('home')
+
+
+
+
+
+
+
+# from reportlab.pdfgen import canvas
+# from reportlab.lib.pagesizes import A4
+# from reportlab.pdfbase import pdfmetrics
+# from reportlab.pdfbase.ttfonts import TTFont
+
+
+# c = canvas.Canvas("watermark.pdf", pagesize=A4)
+# w, h = A4
+
+# pdfmetrics.registerFont(TTFont('Vazir', 'Vazir.ttf'))
+# c.setFont('Vazir', 40)
+
+# c.saveState()
+# c.translate(w/2, h/2)
+# c.rotate(45)
+# c.setFillAlpha(0.15)
+# c.drawCentredString(0, 0, final_text)
+# c.restoreState()
+
+# c.save()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# from django.conf import settings
+# import os
+# from .models import Font
+# from django.shortcuts import redirect
+# def a(request):
+#     import base64
+#     with open("C:\\Users\\1\\Desktop\\Almarai-Light.ttf", "rb") as f:
+#         font_data = f.read()
+
+#     font_b64 = base64.b64encode(font_data).decode("utf-8")
+#     Font.objects.create(data_b64=font_b64)
+#     return redirect('home')
