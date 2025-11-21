@@ -23,18 +23,21 @@
     {% csrf_token %}
     <div class="test">
       <p class="p">شروع تست</p>
-      <input type='number' class="input" name="start">
+      <input type='number' class="input" placeholder="1 تا 9999" value="1" name="start">
     </div>
     <div class="test">
       <p class="p">پایان تست</p>
-      <input type='number' class="input" name="test_count">
+      <input type='number' class="input" placeholder="1 تا 9999" name="test_count">
     </div>
     <div class="test">
       <p class="p">واتر مارک</p>
-      <input type='text' class="input" name="name">
+      <input type='text' class="input" value=" " name="name">
     </div>
 
-
+    <div class="test in">
+      <p class="p">تعداد سطر</p>
+      <input type='text' class="input" placeholder="1 تا 16" value="1" name="rows">
+    </div>
 
     <div class="select">
       <label class="p"> خط دار
@@ -50,11 +53,52 @@
 
 
     <button type="submit" class="btn ">
-      <p >تولید پاسخبرگ</p>
+      <p>تولید پاسخبرگ</p>
     </button>
 
   </form>
+  <script>
+    const radios = document.querySelectorAll('.radio');
 
+    radios.forEach(radio => {
+      radio.addEventListener('change', function () {
+        // همه ورودی‌ها ابتدا نمایش داده شوند
+
+        // حالا بسته به نوع انتخاب شده، نمایش/مخفی‌سازی کنیم
+        if (this.value === 'linear') {
+          // مثال: واترمارک را حذف کنیم
+
+          document.querySelectorAll('.in')[0].style.display = 'flex';
+        }
+        else if (this.value === 'simple') {
+          // مثال: واترمارک را حذف کنیم
+
+          document.querySelectorAll('.in')[0].style.display = 'none';
+        }
+      });
+    });
+  </script>
+  <script>
+    const gy = document.querySelectorAll('.radio');
+
+    radios.forEach(radio => {
+      radio.addEventListener('change', function () {
+        // همه ورودی‌ها ابتدا نمایش داده شوند
+
+        // حالا بسته به نوع انتخاب شده، نمایش/مخفی‌سازی کنیم
+        if (this.value === 'linear') {
+          // مثال: واترمارک را حذف کنیم
+
+          document.querySelectorAll('.in')[0].style.display = 'flex';
+        }
+        else if (this.value === 'simple') {
+          // مثال: واترمارک را حذف کنیم
+
+          document.querySelectorAll('.in')[0].style.display = 'none';
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

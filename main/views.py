@@ -5,7 +5,9 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from .models import Font
 
-
+# ser=[0,1,2,3,4,5,6,7,8,9]
+row={1:36,2:36,3:36,4:35,5:36,6:35,7:32,8:36,9:30,10:33,11:36,12:26,13:28,14:30,15:32,16:34}
+ser=0
 def home(request):
     
     return render(request, "index.html")# , {"a":a})
@@ -19,13 +21,21 @@ def generate_answer_sheet(request):
         name = str(request.POST.get('name'))
         def a(a):
             if start <a:
-                return True
+                global q
+                q=start
+                while q < a//10:
+                    q += 1
+                if start%2 ==1:
+                    q+=1
+                # print(q)
+                return q
             else :
                 return False
 
             
         test_count = request.POST.get("test_count")
         if request.POST.get('type') == 'linear':
+            rows = int(request.POST.get("rows"))
             n=0
             #y=int(test_count)
             # متن شما (چند سطر)
@@ -33,97 +43,170 @@ def generate_answer_sheet(request):
             text_lines = [
             ]
             if a(10):
+                
                 w=y
                 while w > 10:
                     w -= 1
                 for i in range(start, w, 2):
-                    n+=2
+                    n+=1
+                    # print(rows,n)
                     e = f'''{i}. ① ② ③ ④                                       |  {i+1}. ① ② ③ ④'''
                     f='.........................................................   |   .........................................................'
                     text_lines.append(e)
-                    text_lines.append(f)
-                    text_lines.append(f)
-                    text_lines.append(f)
+                    for i in range(rows):
+                        text_lines.append(f)
+                    # text_lines.append(f)
+                    # text_lines.append(f)
                     
 
-                    if n % 18 == 0 or (n + 1) % 18 == 0:
+                    # if n % 18 == 0 or (n + 1) % 18 == 0:
+                    # for as,ad in row.values(),row.keys()
+                    print(row[rows] , rows )
+                    if ((rows+1)*n) % row[rows] == 0 or ((rows+1)*n) % row[rows] == 0:
+                        # print(rows,n)
 
                         text_lines.append(True)
                         n=0
+                    # else:
+                    #     if ((rows+1)*((n//2)+1)) % 35 > 0 or ((rows+1)*(n+2)) % 35 > 0:
+                    #         pass
+                    #     else:
+                    #         # print('''
+                          
+                          
+                          
+                          
+                    #     #    ''',(((rows+1)*(n//2)) % 35 == 0) % 35)
+                    #         text_lines.append(True)
+                    #         n=0
             # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            
             if a(100):
+                q=a(100)
                 w = y
-                q=start
-                while q < 10:
-                    q += 1
+
                 while w > 100:
                     w -= 1
 
                 for i in range(q, w, 2):
-                    n+=2
+                    n+=1
+                    # print(rows,n)
                     e = f'''{i}. ① ② ③ ④                                     |  {i+1}. ① ② ③ ④'''
                     f='.........................................................   |   .........................................................'
                     text_lines.append(e)
-                    text_lines.append(f)
-                    text_lines.append(f)
-                    text_lines.append(f)
-                    if n % 18 == 0 or (n + 1) % 18 == 0:
+                    for i in range(rows):
+                        text_lines.append(f)
+                    # print('''
+                          
+                          
+                    #       dadsdasasdsadsda
+                          
+                    #     #    ''',(rows+1)*((n//2)+1),(n//2)+1,n)
+                    # if ((rows+1)*(n)) % 30 in ser and ((rows+1)*(n)) > 30 and ((rows+1)*(n+1)) % 30 not in ser:#or ((rows+1)*2*n) % 36 == 0:
+                    # for i in range(30,40):
+                    i=38
+                    if ((rows+1)*n) % row[rows] == 0 or ((rows+1)*n) % row[rows] == 0:
+                        # print(rows,n)
+
                         text_lines.append(True)
-                        
                         n=0
-                        #c.showpage()
+                        # print(n)
+                    # else:
+                    #     if ((rows+1)*((n//2)+1)) % 35 > 0 or ((rows+1)*(n+2)) % 35 > 0:
+                    #         pass
+                    #     else:
+                    #         print('''
+                          
+                          
+                    #       dadsdasasdsadsda
+                          
+                    #        ''',(((rows+1)*(2*n)) % 35 == 0))
+                    #         text_lines.append(True)
+                    #         n=0
                 #            # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             if a(1000):
+                q=a(1000)
                 w = y
                 while w > 1000:
                     w -= 1
-                q=start
-                while q < 100:
-                    q += 1
+                # q=start
+                # while q < 100:
+                #     q += 1
                 for i in range(q, w, 2):
-                    n+=2
+                    n+=1
                     e = f'''{i}. ① ② ③ ④                                   |  {i+1}. ① ② ③ ④'''
                     f='.........................................................   |   .........................................................'
                     text_lines.append(e)
-                    text_lines.append(f)
-                    text_lines.append(f)
-                    text_lines.append(f)
-                    if n % 18 == 0 or (n + 1) % 18 == 0:
-                        n=0
+                    for i in range(rows):
+                        text_lines.append(f)
+                    if ((rows+1)*n) % row[rows] == 0 or ((rows+1)*n) % row[rows] == 0:
+                        # print(rows,n)
 
                         text_lines.append(True)
+                        n=0
+                    #     if ((rows+1)*((n//2)+1)) % 35 > 0 or ((rows+1)*(n+2)) % 35 > 0:
+                    #         pass
+                    #     else:
+                    #         print('''
+                          
+                          
+                          
+                          
+                    #        ''',(((rows+1)*(n//2)) % 35 == 0) % 35)
+                    #         text_lines.append(True)
+                    #         n=0
                             # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             if a(10000):
+                q=a(10000)
                 w = y
                 while w > 10000:
                     w -= 1
-                q=start
-                while q < 1000:
-                    q += 1
+                # q=start
+                # while q < 1000:
+                #     q += 1
                 for i in range(q, w, 2):
-                    n+=2
+                    n+=1
                     e = f'''{i}. ① ② ③ ④                                |  {i+1}. ① ② ③ ④'''
                     f='.........................................................   |   .........................................................'
                     text_lines.append(e)
-                    text_lines.append(f)
-                    text_lines.append(f)
-                    text_lines.append(f)
-                    if n % 18 == 0 or (n + 1) % 18 == 0:
-                        n=0
+                    for i in range(rows):
+                        text_lines.append(f)
+                    if ((rows+1)*n) % row[rows] == 0 or ((rows+1)*n) % row[rows] == 0:
+                        # print(rows,n)
 
                         text_lines.append(True)
+                        n=0
                             # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            if y % 2 ==0:
-                e = f'''{y}. ① ② ③ ④                                       '''
-                f='.........................................................   '
-                text_lines.append(e)
-                text_lines.append(f)
-                text_lines.append(f)
-                text_lines.append(f)
+            if start % 2 == 1 :
+                if y %2 ==1:
+                    e = f'''{y}. ① ② ③ ④                                       '''
+                    f='.........................................................   '
+                    text_lines.append(e)
+                    for i in range(rows):
+                        text_lines.append(f)
+                    if ((rows+1)*n) % row[rows] == 0 or ((rows+1)*n) % row[rows] == 0:
+                        # print(rows,n)
 
-                if n % 18 == 0 or (n + 1) % 18 == 0:
+                        text_lines.append(True)
+                        n=0#rint('''
+                          
+                          
+                          
+                          
+                        #    ''',((rows+1)*((n//2)+1)) % 35)
+            else:
+                if y % 2 == 0:
+                    e = f'''{y}. ① ② ③ ④                                       '''
+                    f='.........................................................   '
+                    text_lines.append(e)
+                    for i in range(rows):
+                        text_lines.append(f)
 
-                    text_lines.append(True)
+                    if ((rows+1)*n) % row[rows] == 0 or ((rows+1)*n) % row[rows] == 0:
+                        # print(rows,n)
+
+                        text_lines.append(True)
+                        n=0
         if request.POST.get('type') == 'simple':
             n=0
             #y=int(test_count)
@@ -148,9 +231,7 @@ def generate_answer_sheet(request):
             # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             if a(100):
                 w = y
-                q=start
-                while q < 10:
-                    q += 1
+                q=a(100)
                 while w > 100:
                     w -= 1
 
@@ -168,9 +249,7 @@ def generate_answer_sheet(request):
                 w = y
                 while w > 1000:
                     w -= 1
-                q=start
-                while q < 100:
-                    q += 1
+                q=a(1000)
                 for i in range(q, w, 2):
                     n+=2
                     e = f'''{i}. ① ② ③ ④                                   |  {i+1}. ① ② ③ ④'''
@@ -192,9 +271,7 @@ def generate_answer_sheet(request):
                 w = y
                 while w > 10000:
                     w -= 1
-                q=start
-                while q < 1000:
-                    q += 1
+                q=a(10000)
                 for i in range(q, w, 2):
                     n+=2
                     e = f'''{i}. ① ② ③ ④                                 |  {i+1}. ① ② ③ ④'''
@@ -272,18 +349,22 @@ def generate_answer_sheet(request):
         # response = HttpResponse(buffer, content_type='application/pdf')
         # response['Content-Disposition'] = 'inline; filename="answer_sheet.pdf"'  # نمایش در مرورگر
         # return response
-        a = Font.objects.all()
-        for i in a:
-            font_b64 = i.data_b64
+        a = Font.objects.first()
+        b = Font.objects.last()
+        # for i in a:
+        font_b64 = a.data_b64
+        font_b63 = b.data_b64
         font_bytes = BytesIO(base64.b64decode(font_b64))
+        font_byts = BytesIO(base64.b64decode(font_b63))
         pdfmetrics.registerFont(TTFont('Vazir', font_bytes))
+        pdfmetrics.registerFont(TTFont('asd', font_byts))
         # تنظیمات صفحه
         width, height = (595, 842)  # A4
         buffer = BytesIO()
         c = canvas.Canvas(buffer, pagesize=(width, height))
         draw_frame_and_watermark(c, width, height,name)
                 
-        c.setFont("Vazir", 14)
+        c.setFont("Vazir", 16)
         y = 750
         # فرض کنیم text_lines از قبل تعریف شده
         for line in text_lines:
@@ -291,10 +372,10 @@ def generate_answer_sheet(request):
                 # قاب و واترمارک صفحه فعلی
                 c.showPage()
                 draw_frame_and_watermark(c, width, height,name)
-                c.setFont("Vazir", 14)
+                c.setFont("Vazir", 16)
                 y = 750
             else:
-                c.drawString(80, y, line)
+                c.drawString(40, y, line)
                 y -= 20
         # آخرین صفحه هم قاب و واترمارک بگیرد
         c.showPage()
@@ -308,6 +389,7 @@ def generate_answer_sheet(request):
 
 def draw_frame_and_watermark(c, width, height,a):
     # --- قاب ---
+    # c.setFont("asd", 16)
     margin = 20
     c.setLineWidth(3)
     c.setStrokeColorRGB(0.2, 0.2, 0.2)
@@ -315,25 +397,26 @@ def draw_frame_and_watermark(c, width, height,a):
 
     # --- واترمارک ---
     c.saveState()
-    c.setFont("Helvetica-Bold", 60)
+    c.setFont("asd", 60)
     c.setFillColorRGB(0.85, 0.85, 0.85)
     c.translate(width / 2, height / 2)
     c.rotate(43)
     c.drawCentredString(0, 0, "answer-sheet.liara.run")
     c.drawCentredString(50, 57, a)
     c.restoreState()
+    c.setFont("Vazir", 16)
 
 
 
-# from django.conf import settings
-# import os
-# from .models import Font
-# from django.shortcuts import redirect
-# def a(request):
-#     import base64
-#     with open("C:\\Users\\1\\Desktop\\NotoSansSymbols-VariableFont_wght.ttf", "rb") as f:
-#         font_data = f.read()
+from django.conf import settings
+import os
+from .models import Font
+from django.shortcuts import redirect
+def a(request):
+    import base64
+    with open("C:\\Users\\1\\Desktop\\Almarai-Light.ttf", "rb") as f:
+        font_data = f.read()
 
-#     font_b64 = base64.b64encode(font_data).decode("utf-8")
-#     Font.objects.create(data_b64=font_b64)
-#     return redirect('home')
+    font_b64 = base64.b64encode(font_data).decode("utf-8")
+    Font.objects.create(data_b64=font_b64)
+    return redirect('home')
