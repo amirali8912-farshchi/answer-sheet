@@ -12,7 +12,7 @@ body {
 form {
     width: 50%;
     padding: 20px;
-    height: 75%;
+    height: 90%;
     background-color: rgba(05, 05, 05, 0.75);
     display: flex;
     flex-direction: column;
@@ -52,6 +52,24 @@ form {
 .input::placeholder {
     font-family: shabnam;
     font-size: x-large;
+}
+
+.message {
+    display: none;
+    font-family: shabnam;
+    font-size: x-large;
+    color: #ed2304;
+}
+
+.type {
+    height: 10rem;
+    width: 20rem;
+    border-radius: 30px;
+    background-color: #708090;
+}
+
+.first{
+    background-image: url(https://drive.google.com/u/0/drive-viewer/AKGpihZvCWWMuoiThOS-dzmUhkdGbO9e_4hxNYb4V3IJPXUM_1NxAKehXCCmmTr60sBKmaFBN3nQMBvt8qQzFY3XCZ5rfZme_Y_maQ=s1600-rw-v1);
 }
 
 .in {
