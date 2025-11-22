@@ -36,7 +36,7 @@
 
     <div class="test in">
       <p class="p">تعداد سطر</p>
-      <input type='number' class="input number" placeholder="1 تا 16" value="1" name="rows">
+      <input min="1" max="16" type='number' class="input number" placeholder="1 تا 16" value="1" name="rows">
     </div>
     <div class="test">
       <p class="message">* تعداد سطر باید زیر 17 باشد *</p>
@@ -55,15 +55,20 @@
     </div>
     <div class="type">
       <div class="first">
-        <div class="imag firsst"><img class="img"
-            src="https://github.com/amirali8912-farshchi/answer-sheet/blob/main/main/templates/Screenshot%20(29).png?raw=true"
-            alt=""></div>
+        <input type="radio" name="types" class="hidden" id="first" value="first">
+        <label for="first">
+          <div class="imag firsst"><img class="img"
+              src="https://github.com/amirali8912-farshchi/answer-sheet/blob/main/main/templates/Screenshot%20(29).png?raw=true"
+              alt=""></div>
+        </label>
       </div>
 
       <div class="second">
-        <div class="imag second"><img class="img"
-            src="https://github.com/amirali8912-farshchi/answer-sheet/blob/main/main/templates/Screenshot%20(25).png?raw=true"
-            alt=""></div>
+        <label for="second">
+          <div id="image" class="image seconnd"><img class="img seconnd"
+              src="https://github.com/amirali8912-farshchi/answer-sheet/blob/main/main/templates/jpeg-a5_2g.jpg?raw=true"
+              alt=""></div>
+        </label>
       </div>
     </div>
 
@@ -74,7 +79,7 @@
 
   </form>
   <script>
-    const radios = document.querySelectorAll('.radio');
+    var radios = document.querySelectorAll('.radio');
 
     radios.forEach(radio => {
       radio.addEventListener('change', function () {
@@ -90,6 +95,27 @@
           // مثال: واترمارک را حذف کنیم
 
           document.querySelectorAll('.in')[0].style.display = 'none';
+        }
+      });
+    });
+  </script>
+  <script>
+    var radios = document.querySelectorAll('.radio');
+
+    radios.forEach(radio => {
+      radio.addEventListener('change', function () {
+        // همه ورودی‌ها ابتدا نمایش داده شوند
+
+        // حالا بسته به نوع انتخاب شده، نمایش/مخفی‌سازی کنیم
+        if (this.value === 'simple') {
+          // مثال: واترمارک را حذف کنیم
+
+          document.querySelectorAll('.type')[0].style.display = 'flex';
+        }
+        else if (this.value === 'linear') {
+          // مثال: واترمارک را حذف کنیم
+
+          document.querySelectorAll('.type')[0].style.display = 'none';
         }
       });
     });
