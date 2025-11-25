@@ -1,6 +1,145 @@
+/* عرض اسکرول */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* پس‌زمینه اسکرول */
+::-webkit-scrollbar-track {
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+}
+
+/* خود دسته اسکرول */
+::-webkit-scrollbar-thumb {
+    background: #235a64;
+    border-radius: 10px;
+}
+
+/* زمانی که موس روش میره */
+::-webkit-scrollbar-thumb:hover {
+    background: #358493;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #358493 rgba(0, 0, 0, 0);
+}
+
+
+
+
+
+
+
+#callme {
+    display: none;
+}
+
+.alert {
+    display: flex;
+    /* پیش‌فرض مخفی است */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* background-color: rgba(255, 255, 255, 0.325); */
+    /* سیاه نیمه‌شفاف */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.btn-a {
+    color: #ac483e !important;
+    font-size: larger !important;
+    text-decoration: none !important;
+    width: 7rem !important;
+    height: 2rem !important;
+    background-color: #358493 !important;
+    border-radius: 30px !important;
+}
+
+.alert-- {
+    border: 5px dashed #0064d7;
+    display: flex;
+    /* پیش‌فرض مخفی است */
+    /* position: fixed; */
+    /* top: 0; */
+    /* left: 0; */
+    width: 40rem;
+    height: 24rem;
+    border-radius: 30px;
+    gap: 0.5rem;
+    /* background-color: rgba(0, 0, 0, 1) */
+    background-color: #ac483e;
+    /* سیاه نیمه‌شفاف */
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+}
+
+pre {
+    height: 10rem;
+    overflow-y: scroll;
+    overflow-wrap: normal;
+}
+
+.center {
+    width: 38rem;
+    font-family: Shabnam;
+    /* font-size: x-large; */
+    /* height: 12rem; */
+    color: #FFFAFA;
+    font-family: Shabnam;
+    /* border-radius: 0.75rem; */
+    text-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-btn {
+    all: unset;
+    display: flex;
+    border: 3px dotted #113034;
+    justify-content: center;
+    align-items: center;
+    font-family: Shabnam;
+    font-size: x-large;
+    border-radius: 0.75rem;
+    width: 8rem;
+    height: 4rem;
+    background-color: #358493;
+}
+
+.alert-btn:hover {
+    background-color: #235a64;
+}
+
+.alert-btn:active {
+    background-color: #113034;
+}
+
+.call {
+    position: fixed;
+    right: 0;
+    width: 4rem;
+    height: 2rem;
+    font-size: x-small;
+
+}
+
+/* .callme{
+    background-color: #191919;
+    height: auto;
+    width: 10rem;
+} */
 body {
     height: 100vh;
-    width: 100%;
+    width: 95%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -65,7 +204,7 @@ form {
 .type {
     /* height: 7rem; */
     /* width: 35rem; */
-    width:  auto;
+    width: auto;
     height: 19rem auto;
     padding: 1vh;
     gap: 2vh;
@@ -81,14 +220,17 @@ form {
 .first {
     position: relative;
 }
+
 .seconnd {
     height: 7rem;
     width: 15.2rem !important;
     position: relative;
 }
+
 .hidden {
     display: none;
 }
+
 .image {
     height: 7rem;
     width: 15.125rem;
@@ -96,7 +238,7 @@ form {
     border-radius: 30px;
 }
 
-/* .image::after {
+.image::after {
     content: 'نوع استاندارد';
     font-family: shabnam;
     position: absolute;
@@ -111,8 +253,9 @@ form {
     color: white;
     font-size: 1.2rem;
     backdrop-filter: blur(8px);
-} */
-.image::after {
+}
+
+/* .image::after {
     content: 'به زودی ...';
     font-family: shabnam;
     position: absolute;
@@ -127,9 +270,9 @@ form {
     color: yellow;
     font-size: 1.2rem;
     backdrop-filter: blur(8px);
-}
+} */
 
-/* .image:hover::after {
+.image:hover::after {
     transition: all 56ms;
     content: '';
     position: absolute;
@@ -144,7 +287,24 @@ form {
     justify-content: center;
     color: white;
     font-size: 1.2rem;
-} */
+}
+
+#second:checked~label .image::after {
+    transition: all 56ms;
+    content: '';
+    position: absolute;
+    inset: 0;
+    height: 17rem;
+    width: 12.1rem;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(0px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
 
 .img {
     height: 7rem;
@@ -194,7 +354,8 @@ form {
     color: white;
     font-size: 1.2rem;
 }
-#first:checked ~ label .imag::after {
+
+#first:checked~label .imag::after {
     transition: all 56ms;
     content: '';
     position: absolute;
@@ -281,9 +442,11 @@ form {
     form {
         height: 175% !important;
     }
+
     body {
         height: 130vh !important;
     }
+
     .type {
         /* height: auto; */
         /* display: flex; */
@@ -291,13 +454,16 @@ form {
     }
 
 }
+
 @media only screen and (min-width:640px) {
     form {
         height: 97% !important;
     }
+
     body {
         height: 100vh !important;
     }
+
     .type {
         /* height: auto; */
         /* display: flex; */

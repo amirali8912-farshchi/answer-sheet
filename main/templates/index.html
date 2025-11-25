@@ -16,9 +16,52 @@
   <link rel="preconnect" href="//v1.fontapi.ir">
   <link href="https://v1.fontapi.ir/css/Shabnam" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="shortcut icon" href="{% static 'favicon.ico'%}" type="image/x-icon">
 </head>
 
 <body align="ltr">
+  <button onclick="callme2()" class="alert-btn call">ارتباط با سازنده</button>
+
+  <div id="callme" class="alert">
+    <div class="alert--">
+      <h1 class="center">
+        با سلام
+      </h1>
+      <pre class="center ">
+سازنده : امیرعلی فرشچی
+هدف : سهولت تولید پاسخبرگ 
+Amiralifarshchi891020@gmail.com : email
+ آیدی تلگرام : @amirali_farshchi
+آدرس گیت هاب : Amirali8912-farshchi
+</pre>
+      <a  href="https://github.com/amirali8912-farshchi/answer-sheet" class="center btn-a">source code</a>
+      <button class="alert-btn " onclick="callme()">متوجه شدم</button>
+    </div>
+  </div>
+  <div id="alert" class="alert">
+    <div class="alert--">
+      <h1 class="center">
+        راهنمای استفاده از سایت
+      </h1>
+      <pre class="center ">
+    ضمن تشکر از شما بابت انتخاب این سایت  برای تولید پاسخبرگ مورد نظر خود از شما کاربر گرامی تقاضا داریم تا نکات زیر مورد توجه قرار دهید:
+     *** هیچ یک از فیلد ها حتی گزینه ها را هم خالی نگذارید ***
+     *** با نهایت دقت  فیلد ها را تکمیل نمایید ***
+     *** منظور از واتر مارک نوشته موربی است که در پس زمینه فایل قرار میگیرد ***
+     *** فیلد " شروع تست" باید عددی کوچکتر از فیلد "پایان تست" باشد ***
+     *** در فیلد "پایان تست " تا اعداد 4 رقمی میتوانید وارد نمایید ***
+     ***منظور از گزینه "ساده"همان پاسخبرگ های عمومی است ***
+     *** منظ.ر از گزینه "خط دار" پاسخبرگ هایی است که برای هر تست محل نوشتن راه حل نیز وجود دارد ***
+     *** در صورت انتخاب گزینه "خط دار" فیلدی با نام "تعداد سطر"باز میشود که باید عددی بین 1 و 16 باشد این فیلد تعداد سطر اختصاص داده شده برای هر تست رانشان میدهد ***
+     ***در صورت انتخاب گزینه "ساده" گزینه هایی با نام های "نوع ابداعی" و "نوع استاندارد" نمایش داده میشوند که نوع ابداعی ابداع خود شخص بنده است ولی نوع استاندارد نوعی جهانی است که همه استفاده مینمایند ***
+     *** با تاکید بیشتر اعلان مینمایم که تمام گزینه ها را انتخاب نمایید تا با مشکل مواجه نشوید ***
+    </pre>
+      <button class="alert-btn " onclick="closeAlert()">متوجه شدم</button>
+    </div>
+  </div>
+
+
+
   <form class="form" action="/generate/" method="POST">
     {% csrf_token %}
     <div class="test">
@@ -36,7 +79,7 @@
 
     <div class="test in">
       <p class="p">تعداد سطر</p>
-      <input min="1" max="16" type='number' class="input number" placeholder="1 تا 16" value="1" name="rows">
+      <input min="1" max="16" type='number' class="input number" placeholder="1 تا 16" value="3" name="rows">
     </div>
     <div class="test">
       <p class="message">* تعداد سطر باید زیر 17 باشد *</p>
@@ -64,6 +107,7 @@
       </div>
 
       <div class="second">
+        <input type="radio" name="types" class="hidden" id="second" value="second">
         <label for="second">
           <div id="image" class="image seconnd"><img class="img seconnd"
               src="https://github.com/amirali8912-farshchi/answer-sheet/blob/main/main/templates/jpeg-a5_2g.jpg?raw=true"
@@ -140,6 +184,19 @@
       //      errorMessage.style.display = "block";
       //  }
     });
+  </script>
+  <script>
+    //   window.alert(`ب`)
+    // تابعی برای بستن آلرت
+    function closeAlert() {
+      document.getElementById('alert').style.display = 'none';
+    }
+    function callme() {
+      document.getElementById('callme').style.display = 'none';
+    }
+    function callme2() {
+      document.getElementById('callme').style.display = 'flex';
+    }
   </script>
 </body>
 
