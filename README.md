@@ -80,7 +80,7 @@ If you find a bug, encounter an issue, or have a suggestion for a new feature, p
 
 ## 📄 License
 
-This project is released under the **MIT License**. For full details, please refer to the [LICENSE](https://www.google.com/search?q=LICENSE) file in the root of the project.
+This project is released under the **MIT License**. For full details, please refer to the [LICENSE](https://github.com/amirali8912-farshchi/answer-sheet/blob/main/LICENSE) file in the root of the project.
 
 -----
 
