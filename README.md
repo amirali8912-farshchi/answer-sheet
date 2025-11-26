@@ -62,7 +62,7 @@ This project is built upon the following technologies:
 
 | Role | Technology |
 | :--- | :--- |
-| **Backend** | Python, Django |
+| **Backend** | Python, Django, reportlab, base64 |
 | **Frontend** | HTML, CSS, JavaScript |
 
 -----
