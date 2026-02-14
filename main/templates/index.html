@@ -1,203 +1,81 @@
-{%load static%}
+{% load static %}
 
 <!DOCTYPE html>
-<html dir="rtl" lang=Fa>
+<html lang="en" class="light">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>answer sheet maker</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand(); // تمام‌صفحه
-  </script>
-  <link rel="preconnect" href="//fdn.fontcdn.ir">
-  <link rel="preconnect" href="//v1.fontapi.ir">
-  <link href="https://v1.fontapi.ir/css/Shabnam" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'style.css' %}">
-  <link rel="shortcut icon" href="{% static 'favicon.ico'%}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
-<body align="ltr">
-  <button onclick="callme2()" class="alert-btn call">ارتباط با سازنده</button>
-
-  <div id="callme" class="alert">
-    <div class="alert--">
-      <h1 class="center">
-        با سلام
-      </h1>
-      <pre class="center ">
-سازنده : امیرعلی فرشچی
-هدف : سهولت تولید پاسخبرگ 
-Amiralifarshchi891020@gmail.com : email
- آیدی تلگرام : @amirali_farshchi
-آدرس گیت هاب : Amirali8912-farshchi
-</pre>
-      <a  href="https://github.com/amirali8912-farshchi/answer-sheet" class="center btn-a">source code</a>
-      <button class="alert-btn " onclick="callme()">متوجه شدم</button>
-    </div>
-  </div>
-  <div id="alert" class="alert">
-    <div class="alert--">
-      <h1 class="center">
-        راهنمای استفاده از سایت
-      </h1>
-      <pre class="center ">
-    ضمن تشکر از شما بابت انتخاب این سایت  برای تولید پاسخبرگ مورد نظر خود از شما کاربر گرامی تقاضا داریم تا نکات زیر مورد توجه قرار دهید:
-     *** هیچ یک از فیلد ها حتی گزینه ها را هم خالی نگذارید ***
-     *** با نهایت دقت  فیلد ها را تکمیل نمایید ***
-     *** منظور از واتر مارک نوشته موربی است که در پس زمینه فایل قرار میگیرد ***
-     *** فیلد " شروع تست" باید عددی کوچکتر از فیلد "پایان تست" باشد ***
-     *** در فیلد "پایان تست " تا اعداد 4 رقمی میتوانید وارد نمایید ***
-     ***منظور از گزینه "ساده"همان پاسخبرگ های عمومی است ***
-     *** منظ.ر از گزینه "خط دار" پاسخبرگ هایی است که برای هر تست محل نوشتن راه حل نیز وجود دارد ***
-     *** در صورت انتخاب گزینه "خط دار" فیلدی با نام "تعداد سطر"باز میشود که باید عددی بین 1 و 16 باشد این فیلد تعداد سطر اختصاص داده شده برای هر تست رانشان میدهد ***
-     ***در صورت انتخاب گزینه "ساده" گزینه هایی با نام های "نوع ابداعی" و "نوع استاندارد" نمایش داده میشوند که نوع ابداعی ابداع خود شخص بنده است ولی نوع استاندارد نوعی جهانی است که همه استفاده مینمایند ***
-     *** با تاکید بیشتر اعلان مینمایم که تمام گزینه ها را انتخاب نمایید تا با مشکل مواجه نشوید ***
-    </pre>
-      <button class="alert-btn " onclick="closeAlert()">متوجه شدم</button>
-    </div>
-  </div>
-
-
-
-  <form class="form" action="/generate/" method="POST">
-    {% csrf_token %}
-    <div class="test">
-      <p class="p">شروع تست</p>
-      <input type='number' class="input" placeholder="1 تا 9999" value="1" name="start">
-    </div>
-    <div class="test">
-      <p class="p">پایان تست</p>
-      <input type='number' class="input" placeholder="1 تا 9999" name="test_count">
-    </div>
-    <div class="test">
-      <p class="p">واتر مارک</p>
-      <input type='text' class="input" value=" " name="name">
-    </div>
-
-    <div class="test in">
-      <p class="p">تعداد سطر</p>
-      <input min="1" max="16" type='number' class="input number" placeholder="1 تا 16" value="3" name="rows">
-    </div>
-    <div class="test">
-      <p class="message">* تعداد سطر باید زیر 17 باشد *</p>
-    </div>
-
-    <div class="select">
-      <label class="p"> خط دار
-        <input type="radio" class="radio" name="type" value="linear">
-        <span class="checkmark"></span>
-      </label>
-
-      <label class="p"> ساده
-        <input type="radio" class="radio" name="type" value="simple">
-        <span class="checkmark"></span>
-      </label>
-    </div>
-    <div class="type">
-      <div class="first">
-        <input type="radio" name="types" class="hidden" id="first" value="first">
-        <label for="first">
-          <div class="imag firsst"><img class="img"
-              src="https://github.com/amirali8912-farshchi/answer-sheet/blob/main/main/templates/Screenshot%20(29).png?raw=true"
-              alt=""></div>
-        </label>
-      </div>
-
-      <div class="second">
-        <input type="radio" name="types" class="hidden" id="second" value="second">
-        <label for="second">
-          <div id="image" class="image seconnd"><img class="img seconnd"
-              src="https://github.com/amirali8912-farshchi/answer-sheet/blob/main/main/templates/jpeg-a5_2g.jpg?raw=true"
-              alt=""></div>
-        </label>
-      </div>
-    </div>
-
-
-    <button type="submit" class="btn ">
-      <p>تولید پاسخبرگ</p>
-    </button>
-
-  </form>
-  <script>
-    var radios = document.querySelectorAll('.radio');
-
-    radios.forEach(radio => {
-      radio.addEventListener('change', function () {
-        // همه ورودی‌ها ابتدا نمایش داده شوند
-
-        // حالا بسته به نوع انتخاب شده، نمایش/مخفی‌سازی کنیم
-        if (this.value === 'linear') {
-          // مثال: واترمارک را حذف کنیم
-
-          document.querySelectorAll('.in')[0].style.display = 'flex';
-        }
-        else if (this.value === 'simple') {
-          // مثال: واترمارک را حذف کنیم
-
-          document.querySelectorAll('.in')[0].style.display = 'none';
-        }
-      });
-    });
-  </script>
-  <script>
-    var radios = document.querySelectorAll('.radio');
-
-    radios.forEach(radio => {
-      radio.addEventListener('change', function () {
-        // همه ورودی‌ها ابتدا نمایش داده شوند
-
-        // حالا بسته به نوع انتخاب شده، نمایش/مخفی‌سازی کنیم
-        if (this.value === 'simple') {
-          // مثال: واترمارک را حذف کنیم
-
-          document.querySelectorAll('.type')[0].style.display = 'flex';
-        }
-        else if (this.value === 'linear') {
-          // مثال: واترمارک را حذف کنیم
-
-          document.querySelectorAll('.type')[0].style.display = 'none';
-        }
-      });
-    });
-  </script>
-  <script>
-    const input = document.querySelector(".number");
-    const form = document.querySelector(".form");
-    const message = document.querySelector(".message");
-    //    const errorMessage = document.getElementById("errorMessage");
-
-    form.addEventListener("submit", function (e) {
-      const value = Number(input.value);
-      console.log(value)
-
-      if (value > 16) {
-        e.preventDefault();
-        console.log(value)
-        message.style.display = "block";
-        //      errorMessage.style.display = "none";
-      }// else {
-      //  message.style.display = "none";
-      //      errorMessage.style.display = "block";
-      //  }
-    });
-  </script>
-  <script>
-    //   window.alert(`ب`)
-    // تابعی برای بستن آلرت
-    function closeAlert() {
-      document.getElementById('alert').style.display = 'none';
-    }
-    function callme() {
-      document.getElementById('callme').style.display = 'none';
-    }
-    function callme2() {
-      document.getElementById('callme').style.display = 'flex';
-    }
-  </script>
+<body>
+    <section class="main">
+        <div class="now_bar">
+            <i id="Theme" class="icon bi-sun" title="تم"></i>
+            <i id="callme" class="icon bi-envelope" title="ارتباط با ما"></i>
+            <i id="Information" class="icon bi-question-circle" title="آموزش استفاده از سایت"></i>
+            <!-- <i class="icon bi-info-circle"></i> -->
+            <i class=" icon bi-bell" title="اطلاعیه ها"></i>
+            <i class=" icon bi-person" title="حساب کاربری"></i>
+        </div>
+        <section class="hidden help-me">
+            <h1>راهنمای استفاده از سایت</h1>
+            <p class="text"> ضمن تشکر از شما بابت انتخاب این سایت برای تولید پاسخبرگ مورد نظر خود از شما کاربر گرامی
+                تقاضا داریم تا نکات زیر مورد توجه قرار دهید:</p>
+            <p class="text"> *** هیچ یک از فیلد ها حتی گزینه ها را هم خالی نگذارید ***</p>
+            <p class="text">*** با نهایت دقت فیلد ها را تکمیل نمایید ***</p>
+            <p class="text">*** منظور از واتر مارک نوشته موربی است که در پس زمینه فایل قرار میگیرد ***</p>
+            <p class="text">*** فیلد " شروع تست" باید عددی کوچکتر از فیلد "پایان تست" باشد ***</p>
+            <p class="text">*** در فیلد "پایان تست " تا اعداد 4 رقمی میتوانید وارد نمایید ***</p>
+            <p class="text">***منظور از گزینه "ساده"همان پاسخبرگ های عمومی است ***</p>
+            <p class="text">*** منظور از گزینه "خط دار" پاسخبرگ هایی است که برای هر تست محل نوشتن راه حل نیز وجود دارد
+                ***</p>
+            <p class="text"> *** در صورت انتخاب گزینه "خط دار" فیلدی با نام "تعداد سطر"باز میشود که باید عددی بین 1 و
+                16
+                باشد این فیلد تعداد سطر اختصاص داده شده برای هر تست رانشان میدهد ***</p>
+            <p class="text">***در صورت انتخاب گزینه "ساده" گزینه هایی با نام های "نوع ابداعی" و "نوع استاندارد" نمایش
+                داده میشوند که نوع ابداعی ابداع خود شخص بنده است ولی نوع استاندارد نوعی جهانی است که همه استفاده
+                مینمایند
+                ***
+            </p>
+            <p class="text">*** با تاکید بیشتر اعلان مینمایم که تمام گزینه ها را انتخاب نمایید تا با مشکل مواجه نشوید
+                ***</p>
+            </p>
+        </section>
+        <section class="hidden callme">
+            <h1>
+                با سلام
+            </h1>
+            <p class="text">سازنده : امیرعلی فرشچی</p>
+            <p class="text">هدف : سهولت تولید پاسخبرگ </p>
+            <p class="text">Amiralifarshchi891020@gmail.com : ایمیل</p>
+            <p class="text">Amirali8912-farshchi : آدرس گیت هاب</p>
+            <div class="file">
+                <a href="https://t.me/answersheetmaker" class="center btn-a p">لینک کانال اطلاع رسانی تلگرام</a>
+                <a href="https://github.com/amirali8912-farshchi/answer-sheet" class="center btn-a p">source
+                    code</a>
+            </div>
+        </section>
+        <form id="sub" style="align-items: center;" enctype="multipart/form-data" class="form"
+            action="{% block sub_url %}{% endblock %}" method="post">
+            {% csrf_token %}
+            <div class="header">
+                <h1>فرم پاسخبرگ ساز</h1>
+            </div>
+            <div class="check-or-make">
+                <a href="{% url 'home' %}">تولید پاسخبرگ</a>
+                <a href="{% url 'check' %}">اصلاح پاسخبرگ</a>
+            </div>
+            {%block content%}
+            {%endblock%}
+            <button type="submit">{% block submit %}{%endblock%}</button>
+        </form>
+    </section>
+    <script src="{% static 'main.js' %}"></script>
+    <script src="{% static 'script.js' %}"></script>
 </body>
 
 </html>

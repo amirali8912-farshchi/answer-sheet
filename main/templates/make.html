@@ -1,0 +1,74 @@
+{%extends "index.html"%}
+{%block sub_url%}/generate/{%endblock%}
+{%block content%}
+<div class="input">
+    <label for="start_test">: شروع تست ها </label>
+    <input type="number" class="input_tag" name="start" id="start_test">
+</div>
+<div class="input">
+    <label for="test_finish">: پایان تست ها </label>
+    <input type="number" class="input_tag" name="test_count" id="test_finish">
+</div>
+<div class="input watermark">
+    <label class="" for="watermark">: واتر مارک</label>
+    <input type="text" class="input_tag" name="name" id="watermark">
+</div>
+<div class="input hidden helper">
+    <input type="hidden" name="help" id="HiddenInput">
+    <label class="" for="helper">: زیر بخش ها </label>
+    <div class="helperin" id="helper">
+        <div class="input">
+            <p> سولات </p>
+            <p> : </p>
+            <p> تعداد زیر بخش </p>
+        </div>
+
+    </div>
+    <i id="helper_plus" class="icon bi-plus"></i>
+
+</div>
+<div class="input rows">
+    <label for="lines">: تعداد خط ها </label>
+    <input max="16" min="1" type="number" class="input_tag" value="3" name="rows" id="lines">
+</div>
+<div id="radio" class="input">
+    <div>
+        <label for="simple">ساده</label>
+        <input type="radio" class="check_box" name="tynpe" value="simple" id="simple">
+    </div>
+    <div>
+        <label for="linear">خط دار</label>
+        <input type="radio" class="check_box" name="tynpe" value="linear" id="linear">
+    </div>
+</div>
+<div class="input hidden" id="type_tags">
+    <div>
+        <label class="radio_img" for="one"><img width="120px" id="Radio-tag-img-1">
+            <p id="Radio-tag-p-1">ابداعی</p>
+        </label>
+        <input type="radio" class="hidden" name="types" id="one">
+    </div>
+    <div>
+        <label class="radio_img" for="two"><img id="Radio-tag-img-2" width="120px">
+            <p id="Radio-tag-p-2">ابداعی</p>
+        </label>
+        <input type="radio" class="hidden" name="types" id="two">
+    </div>
+</div>
+<div class="file input">
+    <div>
+        <label for="structure">قالب دارم</label>
+        <input type="checkbox" class="check_box" value="structure" id="structure">
+    </div>
+    <div>
+        <label class="file_choose hidden" for="first_page_file_choose"> انتخاب قالب صفحه اول</label>
+        <input type="file" class="hidden" name="type" id="first_page_file_choose">
+    </div>
+    <div>
+        <label for="second_page_file_choose" class="file_choose hidden"> انتخاب قالب صفحه های
+            ثانویه</label>
+        <input type="file" class="hidden" name="type" id="second_page_file_choose">
+    </div>
+</div>
+{%endblock%}
+{% block submit %}ساخت پاسخبرگ{%endblock%}

@@ -1,408 +1,335 @@
-/*
-عرض اسکرول
-*/
-::-webkit-scrollbar {
-    width: 10px;
+/* ===== تعریف متغیرها ===== */
+:root {
+    --bg: radial-gradient(circle at center, #040324 20%, #000 50%);
+    --form-bg: rgba(15, 15, 15, 0.45);
+    --input-bg: rgba(221, 221, 221, 0.25);
+    --text: #fff;
+    --btn-bg: #212156;
+    --btn-text: #fff;
+    --file-bg: #72722d;
+    --checkbox-border: #555;
+    --checkbox-checked-bg: #3a3a15;
+    --checkbox-checked-color: white;
+    --hover-bg: rgba(15, 15, 15, 0.2);
+    --radio-bg: rgba(15, 15, 15, 0.8);
+    --radio-bg-hover: rgba(15, 15, 15, 0.1);
 }
 
-/* پس‌زمینه اسکرول 
-*/
-::-webkit-scrollbar-track {
-    border-radius: 30px;
-    background: rgba(0, 0, 0, 0);
-    border-radius: 10px;
+/* ===== تم روشن ===== */
+html.light {
+    --bg: radial-gradient(circle at center, #aaab12 20%, #e1e1e1 50%);
+    --form-bg: rgba(255, 255, 255, 0.45);
+    --input-bg: rgba(200, 200, 200, 0.5);
+    --text: #000;
+    --btn-bg: #212156;
+    /* می‌تونی تغییر بدی */
+    --btn-text: #fff;
+    --file-bg: #aabb77;
+    --checkbox-border: #555;
+    --checkbox-checked-bg: #fff;
+    --checkbox-checked-color: #72722d;
+    --hover-bg: rgba(200, 200, 200, 0.3);
+    --radio-bg: rgba(200, 200, 200, 0.8);
+    --radio-bg-hover: rgba(200, 200, 200, 0.1);
 }
 
-/* خود دسته اسکرول 
-*/
-::-webkit-scrollbar-thumb {
-    background: #235a64;
-    border-radius: 10px;
-}
+/* ===== اسکرول بار ====== */
 
-/* زمانی که موس روش میره 
-*/
-::-webkit-scrollbar-thumb:hover {
-    background: #358493;
+::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+    width: 0;
 }
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: #358493 rgba(0, 0, 0, 0);
+    scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
 }
 
-#callme {
-    display: none;
+::-webkit-scrollbar {
+    width: 6px;
 }
 
-.alert {
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== رست سی اساس ===== */
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    transition: all 12ms;
+
+}
+
+/* ===== آیکون ==== */
+.icon {
     display: flex;
-    /* پیش‌فرض مخفی است */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%; /* اطمینان از پوشش کامل صفحه */
-    height: 100vh;
-    /* background-color: rgba(255, 255, 255, 0.325); */
-    /* سیاه نیمه‌شفاف */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.btn-a {
-    color: #ac483e !important;
-    font-size: larger !important;
-    text-decoration: none !important;
-    /* width: 7rem !important; */
-    /* height: 2rem !important; */
-    background-color: #358493 !important;
-    border-radius: 30px !important;
-}
-
-.alert-- {
-    border: 5px dashed #0064d7;
-    display: flex;
-    width: 90%; /* ریسپانسیو: استفاده از درصد */
-    max-width: 40rem; /* حداکثر عرض برای دسکتاپ */
-    height: auto; /* ارتفاع بر اساس محتوا */
-    padding: 1rem;
-    border-radius: 30px;
-    gap: 0.5rem;
-    background-color: #ac483e;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    z-index: 1000;
-}
-
-pre {
-    height: 10rem;
-    max-height: 10rem; /* تضمین حداکثر ارتفاع */
-    overflow-y: scroll;
-    overflow-wrap: normal;
-    width: 90%; /* ریسپانسیو شدن محتوای متنی */
-}
-
-.center {
-    width: 100%; /* برای پر کردن عرض کانتینر .alert-- */
-    padding: 1rem;
-    font-family: Shabnam;
-    color: #FFFAFA;
-    text-align: center; /* تراز کردن متن */
-    text-wrap: wrap;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.alert-btn {
-    all: unset;
-    display: flex;
-    border: 3px dotted #113034;
-    justify-content: center;
-    align-items: center;
-    font-family: Shabnam;
-    font-size: x-large;
-    border-radius: 0.75rem;
-    width: 8rem;
-    height: 4rem;
-    background-color: #358493;
-    cursor: pointer; /* اضافه شدن نشانگر */
-}
-
-.alert-btn:hover {
-    background-color: #235a64;
-}
-
-.alert-btn:active {
-    background-color: #113034;
-}
-
-.call {
-    position: fixed;
-    right: 0.5rem; /* فاصله از سمت راست */
-    bottom: 0.5rem; /* فاصله از پایین */
-    width: auto;
-    height: auto;
-    padding: 0.3rem 0.6rem;
-    font-size: x-small;
-    z-index: 900;
-}
-
-/* * * استایل‌های اصلی فرم و بدنه 
-* */
-
-body {
-    height: 100vh; /* تغییر از 100vh به auto در موبایل */
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #191919;
-}
-
-form {
-    width: 90%; /* ریسپانسیو: از 50% به 90% تغییر کرد */
-    max-width: 800px; /* حداکثر عرض فرم برای دسکتاپ */
-    padding: 20px;
-    height: 97%;
-    background-color: rgba(05, 05, 05, 0.75);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    border-radius: 40px;
-}
-
-.test {
-    display: flex;
-    justify-content: space-around;
-    /* اضافه شدن امکان رپ شدن برای موبایل‌های کوچک */
-    flex-wrap: wrap; 
-    gap: 1rem;
-}
-
-.p {
-    font-family: Shabnam;
-    font-size: x-large;
-    color: #dbdbdb;
-}
-
-.test .input {
-    width: 9rem;
-    color: white;
-    font-size: 2rem;
-    background-color: rgba(255, 255, 255, 0.225) !important;
-    backdrop-filter: blur(300px);
-    border-radius: 30px;
-}
-
-.input::placeholder {
-    font-family: shabnam;
-    font-size: x-large;
-}
-
-.message {
-    display: none;
-    font-family: shabnam;
-    font-size: x-large;
-    color: #ed2304;
-}
-
-.type {
-    padding: 1vh;
-    gap: 2vh;
-    display: none;
-    flex-direction: row; /* در موبایل به column تغییر می‌کند */
-    border-radius: 30px;
-    justify-content: space-around;
-    align-items: center; /* تراز عمودی برای چیدمان ستونی */
-}
-
-.first, .seconnd {
-    position: relative;
-    /* تضمین اینکه در حالت ستونی، عرض به اندازه کافی بزرگ باشد */
-    width: 15.5rem; 
-    height: 7rem;
-}
-
-.hidden {
-    display: none;
-}
-
-/* استایل دهی عمومی تصاویر انتخاب نوع
-*/
-.image, .imag {
-    height: 7rem;
-    width: 100%; /* استفاده از 100% برای پر کردن کانتینر .first/seconnd */
-    border-radius: 30px;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding-top: 2vh;
+    color: var(--text);
     cursor: pointer;
-    box-sizing: border-box; /* برای جلوگیری از سرریز شدن padding/border */
 }
 
-.image::after, .imag::after {
-    font-family: shabnam;
-    position: absolute;
-    inset: 0;
+/* ===== بدنه ===== */
+body {
     width: 100%;
-    height: 100%;
-    border-radius: 30px;
-    background-color: rgba(5, 5, 5, 0.25);
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 1.2rem;
-    backdrop-filter: blur(8px);
+    align-items: center;
+    background: var(--bg);
+    overflow: hidden;
+    height: 100vh;
 }
 
-.image::after {
-    content: 'نوع استاندارد';
-}
-.imag::after {
-    content: 'نوع ابداعی';
-}
-
-/* هاور و حالت انتخاب شده برای نوع استاندارد
-*/
-.image:hover::after,
-#second:checked~label .image::after {
-    transition: all 56ms;
-    content: '';
-    background-color: rgba(255, 255, 255, 0);
-    backdrop-filter: blur(0px);
-}
-
-/* هاور و حالت انتخاب شده برای نوع ابداعی
-*/
-.imag:hover::after,
-#first:checked~label .imag::after {
-    transition: all 56ms;
-    content: '';
-    background-color: rgba(255, 255, 255, 0);
-    backdrop-filter: blur(0px);
-}
-
-.img {
-    height: 7rem;
-    width: auto;
-    border-radius: 30px;
-}
-
-.in {
-    display: none;
-}
-
-.select {
+/* ===== main ===== */
+.main {
+    width: 80%;
+    height: 80%;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    background-color: var(--form-bg);
+    border-radius: 34px;
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
-    gap: 0.75rem;
-    height: 1.5rem;
-    padding: 0.75rem;
 }
 
-.btn {
-    font-family: Shabnam;
-    font-size: x-large;
-    background-color: rgba(155, 255, 155, 0.5) !important;
-    backdrop-filter: blur(300px);
-    border: 30px;
-    border-radius: 30px;
+/* ===== صفحه دوم ===== */
+.form,
+.callme,
+.help-me {
+    overflow-y: scroll;
+    width: 82%;
+    height: 95%;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    padding-right: 5vh;
+    background-color: var(--form-bg);
+    border-radius: 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 2rem;
 }
 
-.radio {
+/* ===== helper-tag ===== */
+.helper_input_tag {
+    width: 12vw !important;
+}
+
+/* ===== helper ====== */
+.helperin {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+/* ===== اینپوت و تگ ===== */
+.input {
+    color: var(--text);
+    width: 80%;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+}
+
+.input_tag {
+    color: var(--text);
+    padding: 0.375rem;
+    width: 7rem;
+    background-color: var(--input-bg);
+    border-radius: 10px;
+}
+
+/* ===== چک باکس ===== */
+.check_box {
     appearance: none;
     -webkit-appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid #555;
-    border-radius: 5px;
+    border: 2px solid var(--checkbox-border);
+    border-radius: 50%;
     cursor: pointer;
-    color: #90ff70;
     position: relative;
 }
 
-
-.radio:checked {
-    background-color: #4caf50;
-    border-color: #4caf50;
+.check_box:checked {
+    background-color: var(--checkbox-checked-bg);
+    border-color: var(--checkbox-checked-bg);
 }
 
-.radio:checked::after {
+.check_box:checked::after {
     content: "✔";
-    color: white;
+    color: var(--checkbox-checked-color);
     display: flex;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
+    font-size: 14px;
 }
 
-/*
-* * Media Queries برای موبایل و تبلت 
-*
-*/
-
-/* --- تبلت و دسکتاپ کوچک (Small Desktop) --- */
-@media only screen and (max-width:992px) {
-    form {
-        width: 80%; /* کمی عریض‌تر از حالت موبایل خالص */
-    }
+/* ===== متون ===== */
+.text {
+    width: 60vw;
+    /* padding-left: -12rem; */
+    gap: 9vh;
+    height: 25vh;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: large;
+    color: var(--text);
+    text-align: end;
 }
 
-/* --- موبایل (Mobile: < 640px) --- */
-@media only screen and (max-width:640px) {
-    /* * رفع مشکلات اصلی موبایل 
-    */
-    
-    /* تنظیم مجدد ارتفاع برای جلوگیری از اسکرول غیرضروری */
-    body {
-        height: auto !important; /* ارتفاع بر اساس محتوا */
-        padding-top: 20px; /* اضافه کردن کمی فاصله از بالا */
-    }
 
-    form {
-        width: 95%; 
-        height: auto !important; /* ارتفاع بر اساس محتوا */
-        padding: 10px;
-    }
-    
-    /* این بخش حذف شد زیرا .alert باید کل صفحه را بپوشاند */
-    /* .alert{
-        width: 4REM;
-    } */
+/* ===== فایل چوز و لینک ها ===== */
+.file_choose,
+a {
+    color: var(--btn-text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    /* width: 75%; */
+    justify-content: center;
+    text-align: center;
+    padding: 0.375rem;
+    height: 5vh;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: var(--file-bg);
+}
 
-    /* چیدمان عمودی برای انتخاب نوع */
-    .type {
+/* ===== دکمه ===== */
+form button {
+    border-radius: 10px;
+    font-size: x-large;
+    width: 50%;
+    height: 10%;
+    cursor: pointer;
+    padding: 0.375rem;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+}
+
+/* ===== تصاویر رادیو ===== */
+.radio_img img {
+    position: absolute;
+    z-index: 0;
+    width: 120px;
+    border-radius: 20px;
+}
+
+.radio_img {
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    width: 120px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: all 0.3s;
+}
+
+.radio_img p:hover {
+    color: var(--text);
+    background-color: var(--hover-bg);
+}
+
+.radio_img p {
+    border-radius: 20px;
+    color: var(--text);
+    position: absolute;
+
+    width: 120px;
+    height: 67.5px;
+    background-color: var(--radio-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+/* ===== فایل کانتینر ===== */
+.file {
+    height: 20vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* ===== هدر ===== */
+.header {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== بار =====*/
+.now_bar {
+    width: 9vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* ===== تیتر ===== */
+h1 {
+    width: 80%;
+    font-size: x-large;
+    color: var(--text);
+    text-align: center;
+}
+
+/* ===== مخفی ===== */
+.hidden {
+    display: none;
+}
+
+/* ===== ریسپانسیو ===== */
+@media only screen and (max-width:427px) {
+    .main {
         flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .first, .seconnd {
-        width: 90%; /* پر کردن عرض فرم در حالت ستونی */
-        max-width: 300px; /* حداکثر عرض برای خوانایی */
-        height: auto;
     }
 
-    .image, .imag {
-        height: 7rem;
-    }
-    
-    .test .input {
-        width: 80%; /* ورودی‌ها عریض‌تر شوند */
-        font-size: 1.5rem;
-    }
-    
-    .p {
-        font-size: large;
-    }
-}
 
-/* --- موبایل کوچک (Small Mobile: < 480px) --- */
-@media (max-width: 480px) {
-    .alert-- {
-        border-radius: 15px;
-        border-width: 3px;
-        padding: 0.5rem;
+
+    .form,
+    .callme,
+    .help-me,
+    .main {
+        width: 97vw;
     }
 
-    .center {
-        font-size: small;
+
+
+    .now_bar {
+        height: 10vh;
+        width: 100%;
+        flex-direction: row;
+        padding-top: -2vh;
+        padding-bottom: 2vh;
     }
 
-    .alert-btn {
-        font-size: small;
-        height: 2.5rem;
-    }
-    
-    /* کاهش اندازه متن برای ورودی‌ها */
-    .test .input {
-        font-size: 1.2rem;
-        width: 100%; /* حداکثر عرض در فضای محدود */
-    }
+
 }

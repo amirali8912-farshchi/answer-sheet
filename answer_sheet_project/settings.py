@@ -3,7 +3,7 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-تست-برای-پروژه'
+SECRET_KEY = 'dlkgdnjhyuhdfm-dfggdyu'
 
 DEBUG = True
 ALLOWED_HOSTS = ['*']
@@ -60,5 +60,5 @@ USE_I18N = True
 USE_TZ = True
 CSRF_TRUSTED_ORIGINS = ['https://web-production-75b14.up.railway.app']
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

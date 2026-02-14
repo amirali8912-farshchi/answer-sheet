@@ -1,0 +1,9 @@
+{%extends 'index.html'%}
+{%block sub_url%}/checking/{%endblock%}
+{% block content %}
+<div>
+    <label class="file_choose" for="check_photo">انتخاب ورقه تکمیل شده</label>
+    <input type="file" class="hidden" name="img" id="check_photo">
+</div>
+{% endblock %}
+{% block submit %}اصلاح پاسخبرگ{% endblock %}
