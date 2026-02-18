@@ -76,7 +76,7 @@ row = {
 # رندر کردن صفحه اول
 def home(request):
 
-    return render(request, "make.html")
+    return render(request, "index.html")
 
 
 # تولید پاسخبرگ
@@ -91,13 +91,15 @@ def generate_answer_sheet(request):
         start = int(request.POST.get("start", None))
         types = request.POST.get("types", None)
         Help2=request.POST.get("help",None)
-        if Help2!=None:
+        if Help2==None:
+            print(Help2,True)
             Help={0:0}
         else:
+            print(Help2,False)
             Help=json.loads(Help2)
 
         #دریافت فونت از پایگاه داده
-        pdfmetrics.registerFont(TTFont("font_askal", BytesIO(base64.b64decode(Font.objects.first().data_b64))))
+        pdfmetrics.registerFont(TTFont("font_ashkal", BytesIO(base64.b64decode(Font.objects.first().data_b64))))
         pdfmetrics.registerFont(TTFont("font_farsi", BytesIO(base64.b64decode(Font.objects.last().data_b64))))
         # تنظیمات صفحه
         width, height = (595, 842)  # A4
@@ -137,7 +139,7 @@ def generate_answer_sheet(request):
             c = canvas.Canvas(buffer, pagesize=(width, height))
             draw_frame_and_watermark(c, width, height, name)
             if tyype == "simple" or (tyype == "linear" and types == "solution"):
-                c.setFont("font_askal", 16)
+                c.setFont("font_ashkal", 16)
             elif types == "anatomical":
                 c.setFont("font_farsi", 16)
             response = main(
@@ -188,6 +190,7 @@ def check(List,data):
     
 # بدنه اصلی کد
 def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, rows):
+    
     # تولید پاسخبرگ خط دار
     if tyype == "linear" or (tyype == "simple", types == "inventive"):
         how_many = 0
@@ -202,20 +205,20 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
             another_lines_last=False
             how_many += 1
             if types == "anatomical":
-                print(check(Help.keys(),7),Help.keys())
+                print(check(Help.keys(),test),Help.keys())
                 if check(Help.keys(),test):
                     for i in range(0,int(Help[str(test)]),2):
                         how_many+=1
                         if int(Help[str(test)])>1:
                             if int(Help[str(test)])%2==1 and i+1==int(Help[str(test)]):
                                 another_lines_last=True
-                                first_line=f'''{test}) {abjad[i]} )   :......................{'              '[len(str(test))*2:]}|{test+1})   :......................'''
+                                first_line=f'''{test}) {abjad[i]} )   :......................{'              '[len(str(test))*2:]}|   {test+1})   :......................'''
                             elif i<int(Help[str(test)]):
                                 another_lines_last=True
-                                first_line=f'''{test}) {abjad[i]} )   :......................{'              '[len(str(test))*2:]}|{test}) {abjad[i+1]} )   :......................'''
+                                first_line=f'''{test+1}) {abjad[i]} )   :......................{'                   '[len(str(test+1))*2:]}|   {test+1}) {abjad[i+1]} )   :......................'''
                         else:
                             another_lines_last=True
-                            first_line=f'''{test}) {abjad[i]} )   :......................{'              '[len(str(test))*2:]}|{test+1})   :......................'''
+                            first_line=f'''{test}) {abjad[i]} )   :......................{'              '[len(str(test))*2:]}|  {test+1})   :......................'''
                         text_lines.append(first_line)
                         another_lines = "S.........................................................   |   ........................................................."
                         another_lines_last=True
@@ -224,7 +227,7 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                     how_many-=1
                 elif check(Help.keys(),test+1):
                     how_many+=1
-                    first_line=f'''{test}.:......................{'              '[len(str(test))*2:]}|{test+1}) {abjad[0]} )   :......................'''
+                    first_line=f'''{test} ) :......................{'                      '[len(str(test))*2:]}|  {test+1}) {abjad[0]} )   :......................'''
                     text_lines.append(first_line)
                     another_lines = "A.........................................................   |   ........................................................."
                     another_lines_last=True          
@@ -235,22 +238,21 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                             how_many+=1
                             if  int(Help[str(test+1)])%2==1  and i==int(Help[str(test+1)]):
                                 p=1
-                                first_line=f'''{test}) {abjad[i]} )   :......................{'              '[len(str(test))*2:]}|{test+1})   :......................'''
+                                first_line=f'''{test+1}) {abjad[i]} )   :......................{'              '[len(str(test+1))*2:]}|   {test+1} )   :......................'''
                                 text_lines.append(first_line)
-                            # elif int(Help[str(test+1)])%2==0  and i<int(Help[str(test+1)]):
-                            elif i<int(Help[str(test)]):
+                            elif i<int(Help[str(test+1)]):
                                 another_lines_last=True
-                                first_line=f'''{test}) {abjad[i]} )   :......................{'              '[len(str(test))*2:]}|{test}) {abjad[i+1]} )   :......................'''
+                                first_line=f'''{test+1}) {abjad[i]} )   :......................{'              '[len(str(test+1))*2:]}|   {test+1} ) {abjad[i+1]} )   :......................'''
                                 text_lines.append(first_line)
                                 another_lines = "D.........................................................   |   ........................................................."
                                 for _ in range(rows):
                                     text_lines.append(another_lines)                    
                 elif another_lines_last==False :
-                    first_line=f"""{test})  :......................{'                '[len(str(test))*2:]}|  {test+1} )  :......................"""
-                    text_lines.append(first_line)
+                    first_line=f"""{test})  :......................{'                     '[len(str(test))*2:]}|  {test+1} )  :......................"""
+                    text_lines.append(first_line) 
                     
             else:
-                first_line = f"""{test} ) ① ② ③ ④{'                                         '[len(str(test))*2:]}|  {test+1} ) ① ② ③ ④"""
+                first_line = f"""{test} ) ① ② ③ ④{'                                               '[len(str(test))*2:]}|  {test+1} ) ① ② ③ ④"""
                 text_lines.append(first_line)
             if tyype == "linear" and another_lines_last==False:
                 another_lines = "L.........................................................   |   ........................................................."
@@ -321,13 +323,13 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                 c.showPage()
                 draw_frame_and_watermark(c, width, height, name)
                 if tyype == "simple" or (tyype == "linear" and types == "solution"):
-                    c.setFont("font_askal", 16)
+                    c.setFont("font_ashkal", 16)
                 elif types == "anatomical":
                     c.setFont("font_farsi", 16)
                 column_y = 750
             else:
                 if types == "Standard":
-                    c.setFont("font_askal", 16)
+                    c.setFont("font_ashkal", 16)
                     c.drawString(row_x, column_y, str(line))
                     column_y -= 20
                     if text_lines.index(line) != 0:
@@ -340,6 +342,7 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                     reshaped_text = arabic_reshaper.reshape(str('جواب نهایی'))
                     final_text = get_display(reshaped_text)
                     k_x=40
+                    k_x_2=0
                     is_last_Number=False
                     is_dot=False
                     for k in line:
@@ -358,7 +361,8 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                             reshaped_text = arabic_reshaper.reshape(str(k))
                             final_text = get_display(reshaped_text)
                             c.drawString(k_x, column_y, final_text)
-                            k_x+=9+k_x_2
+                            k_x+=10+k_x_2
+                            k_x_2+=10
                             reshaped_text = arabic_reshaper.reshape(str('جواب نهایی'))
                             final_text = get_display(reshaped_text)
                             

@@ -6,9 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>پاس ساز</title>
     <link rel="stylesheet" href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.min.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -18,8 +21,8 @@
             <i id="callme" class="icon bi-envelope" title="ارتباط با ما"></i>
             <i id="Information" class="icon bi-question-circle" title="آموزش استفاده از سایت"></i>
             <!-- <i class="icon bi-info-circle"></i> -->
-            <i class=" icon bi-bell" title="اطلاعیه ها"></i>
-            <i class=" icon bi-person" title="حساب کاربری"></i>
+            <!-- <i class=" icon bi-bell" title="اطلاعیه ها"></i>
+            <i class=" icon bi-person" title="حساب کاربری"></i> -->
         </div>
         <section class="hidden help-me">
             <h1>راهنمای استفاده از سایت</h1>
@@ -59,16 +62,70 @@
                     code</a>
             </div>
         </section>
-        <form id="sub" style="align-items: center;" enctype="multipart/form-data" class="form"
-            action="{% block sub_url %}{% endblock %}" method="post">
+        <form id="sub" style="align-items: center;" enctype="multipart/form-data" class="form" action="/generate/"
+            method="post">
             {% csrf_token %}
             <div class="header">
-                <h1>فرم پاسخبرگ ساز</h1>
+                <h1>پاس ساز <br> فرم پاسخبرگ ساز</h1>
             </div>
 
-            {%block content%}
-            {%endblock%}
-            <button type="submit">{% block submit %}{%endblock%}</button>
+            <div class="input">
+                <label for="start_test">: شروع تست ها </label>
+                <input type="number" class="input_tag" name="start" id="start_test">
+            </div>
+            <div class="input">
+                <label for="test_finish">: پایان تست ها </label>
+                <input type="number" class="input_tag" name="test_count" id="test_finish">
+            </div>
+            <div class="input watermark">
+                <label class="" for="watermark">: واتر مارک</label>
+                <input type="text" class="input_tag" name="name" id="watermark">
+            </div>
+            <div class="input hidden helper">
+                <input type="hidden" name="help" id="HiddenInput">
+                <label class="" for="helper">: زیر بخش ها </label>
+                <div class="helperin" id="helper">
+                    <div class="input">
+                        <p> سولات </p>
+                        <p> : </p>
+                        <p> تعداد زیر بخش </p>
+                    </div>
+
+                </div>
+                <i id="helper_plus" class="icon bi-plus"></i>
+
+            </div>
+            <div class="input rows">
+                <label for="lines">: تعداد خط ها </label>
+                <input max="16" min="1" type="number" class="input_tag" value="3" name="rows" id="lines">
+            </div>
+            <div id="radio" class="input">
+                <div>
+                    <label for="simple">ساده</label>
+                    <input type="radio" class="check_box" name="tynpe" value="simple" id="simple">
+                </div>
+                <div>
+                    <label for="linear">خط دار</label>
+                    <input type="radio" class="check_box" name="tynpe" value="linear" id="linear">
+                </div>
+            </div>
+            <div class="input hidden" id="type_tags">
+                <div>
+                    <label class="radio_img" for="one"><img width="120px" id="Radio-tag-img-1">
+                        <p id="Radio-tag-p-1">ابداعی</p>
+                    </label>
+                    <input type="radio" class="hidden" name="types" id="one">
+                </div>
+                <div>
+                    <label class="radio_img" for="two"><img id="Radio-tag-img-2" width="120px">
+                        <p id="Radio-tag-p-2">ابداعی</p>
+                    </label>
+                    <input type="radio" class="hidden" name="types" id="two">
+                </div>
+            </div>
+
+
+            <button type="submit">ساخت پاسخبرگ</button>
         </form>
     </section>
     <script src="{% static 'main.js' %}"></script>

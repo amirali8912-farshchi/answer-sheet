@@ -25,19 +25,62 @@ function hidden(clas, dis) {
         element.style.display = `${dis}`
     });
 }
-//قالب دارم
-structure.addEventListener('click', () => {
-    if (structure.checked == true) {
-        hidden('file_choose', 'block');
-        hidden('watermark', 'none');
+
+//checking - the local storage
+if (localStorage.getItem('theme') == 'dark') {
+    them('dark')
+} else if (localStorage.getItem('theme') == 'light') {
+    them('light')
+}
+//function - theme
+function them(theme) {
+    if (theme == 'dark') {
+        html_tag.className = '';
+        Theme.className = 'icon bi-moon';
+        localStorage.setItem('theme', 'dark')
+    } else if (theme == 'light') {
+        html_tag.className = 'light';
+        Theme.className = 'icon bi-sun';
+        localStorage.setItem('theme', 'light')
+    }
+
+};
+
+//Theme
+Theme.addEventListener('click', () => {
+    if (html_tag.className == 'light') {
+        them('dark');
+    } else if (html_tag.className == '') {
+        them('light');
     };
-    if (structure.checked == false) {
-        hidden('file_choose', 'none');
-        hidden('watermark', 'flex');
-    };
+});
+//callme
+callme.addEventListener('click', () => {
+    if (callme.className == 'icon bi-envelope') {
+        hidden('form', 'none');
+        hidden('callme', 'flex');
+        callme.className = 'icon bi-arrow-90deg-left'
+    } else if (callme.className == 'icon bi-arrow-90deg-left') {
+        hidden('form', 'flex');
+        hidden('callme', 'none');
+        callme.className = 'icon bi-envelope'
+    }
+});
+//Information
+Information.addEventListener('click', () => {
+    if (Information.className == 'icon bi-question-circle') {
+        hidden('form', 'none');
+        hidden('help-me', 'flex');
+        Information.className = 'icon bi-arrow-90deg-left'
+    } else if (Information.className == 'icon bi-arrow-90deg-left') {
+        hidden('form', 'flex');
+        hidden('help-me', 'none');
+        Information.className = 'icon bi-question-circle'
+    }
 });
 //زیر محور پاسخبرگ
 radio_tags.addEventListener('click', () => {
+    console.log(RadioTag_linear.checked);
 
 
     if (RadioTag_linear.checked == true) {
@@ -119,6 +162,8 @@ sub.addEventListener('submit', (e) => {
     }
 
     HiddenInput.value = JSON.stringify(help)
+    console.log(HiddenInput.value);
+
 
     sub.submit();
 })
