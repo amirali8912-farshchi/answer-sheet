@@ -229,7 +229,7 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                     how_many+=1
                     first_line=f'''{test} ) :......................{'                      '[len(str(test))*2:]}|  {test+1}) {abjad[0]} )   :......................'''
                     text_lines.append(first_line)
-                    another_lines = "A.........................................................   |   ........................................................."
+                    another_lines = ".........................................................   |   ........................................................."
                     another_lines_last=True          
                     for _ in range(rows):
                         text_lines.append(another_lines)                    
@@ -252,10 +252,10 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                     text_lines.append(first_line) 
                     
             else:
-                first_line = f"""{test} ) ① ② ③ ④{'                                               '[len(str(test))*2:]}|  {test+1} ) ① ② ③ ④"""
+                first_line = f"""{test} ) ① ② ③ ④{'                                        '[len(str(test))*2:]}|  {test+1} ) ① ② ③ ④"""
                 text_lines.append(first_line)
             if tyype == "linear" and another_lines_last==False:
-                another_lines = "L.........................................................   |   ........................................................."
+                another_lines = ".........................................................   |   ........................................................."
                 for _ in range(rows):
                     text_lines.append(another_lines)
 
