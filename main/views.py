@@ -92,10 +92,8 @@ def generate_answer_sheet(request):
         types = request.POST.get("types", None)
         Help2=request.POST.get("help",None)
         if Help2==None:
-            print(Help2,True)
             Help={0:0}
         else:
-            print(Help2,False)
             Help=json.loads(Help2)
 
         #دریافت فونت از پایگاه داده
@@ -201,11 +199,9 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
         Start = start
         test=Start
         while test<test_count:
-            print(Help,test)
             another_lines_last=False
             how_many += 1
             if types == "anatomical":
-                print(check(Help.keys(),test),Help.keys())
                 if check(Help.keys(),test):
                     for i in range(0,int(Help[str(test)]),2):
                         how_many+=1
@@ -215,16 +211,17 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                                 first_line=f'''{test}) {abjad[i]} )   :......................{'              '[len(str(test))*2:]}|   {test+1})   :......................'''
                             elif i<int(Help[str(test)]):
                                 another_lines_last=True
-                                first_line=f'''{test+1}) {abjad[i]} )   :......................{'                   '[len(str(test+1))*2:]}|   {test+1}) {abjad[i+1]} )   :......................'''
+                                first_line=f'''{test}) {abjad[i]} )   :......................{'               '[len(str(test))*2:]}|   {test}) {abjad[i+1]} )   :......................'''
                         else:
                             another_lines_last=True
                             first_line=f'''{test}) {abjad[i]} )   :......................{'              '[len(str(test))*2:]}|  {test+1})   :......................'''
                         text_lines.append(first_line)
-                        another_lines = "S.........................................................   |   ........................................................."
+                        another_lines = ".........................................................   |   ........................................................."
                         another_lines_last=True
                         for _ in range(rows):
                             text_lines.append(another_lines)
                     how_many-=1
+                    test-=1
                 elif check(Help.keys(),test+1):
                     how_many+=1
                     first_line=f'''{test} ) :......................{'                      '[len(str(test))*2:]}|  {test+1}) {abjad[0]} )   :......................'''
@@ -247,10 +244,11 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                                 another_lines = "D.........................................................   |   ........................................................."
                                 for _ in range(rows):
                                     text_lines.append(another_lines)                    
+                    
                 elif another_lines_last==False :
                     first_line=f"""{test})  :......................{'                     '[len(str(test))*2:]}|  {test+1} )  :......................"""
                     text_lines.append(first_line) 
-                    
+                                      
             else:
                 first_line = f"""{test} ) ① ② ③ ④{'                                        '[len(str(test))*2:]}|  {test+1} ) ① ② ③ ④"""
                 text_lines.append(first_line)
@@ -343,13 +341,20 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                     final_text = get_display(reshaped_text)
                     k_x=40
                     k_x_2=0
+                    k_x_3=0
                     is_last_Number=False
                     is_dot=False
+                    # print(line)
+                    print(list(line)[25:58])#=='   ')#list(line).index(k)-38]=='ا')
                     for k in line:
                         reshaped_text = arabic_reshaper.reshape(str('جواب نهایی'))
                         final_text = get_display(reshaped_text)
-
+                        # if list(line)[28]=='ا':
+                        #     k_x-=k_x_3
+                            # print(list(line)[3])#list(line).index(k)-38]=='ا')
                         if k=='.' or k==':' or k==' '  or k==')' or k=='|':
+                            if line[(list(line).index(k))-18] == 'ا':
+                                k_x-=k_x_3
                             is_dot=True
                             c.drawString(k_x, column_y, k)
                             k_x+=4
@@ -358,6 +363,7 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                             if k=='ا' :
                                 k='الف'
                                 k_x_2+=10
+                                line
                             reshaped_text = arabic_reshaper.reshape(str(k))
                             final_text = get_display(reshaped_text)
                             c.drawString(k_x, column_y, final_text)
