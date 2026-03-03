@@ -80,17 +80,20 @@ def home(request):
 
 
 # تولید پاسخبرگ
-def generate_answer_sheet(request):
+def generate_answer_sheet(request ,rows=None,tyype=None,test_count=None,name=None,start=None,types=None,Help2=None):
 
-    if request.method == "POST":
+    if request.method == "POST" or request.method == "GET":
         # دریافت ورودی ها
-        rows = int(request.POST.get("rows", None))
-        tyype = request.POST.get("tynpe", None)
-        test_count = int(request.POST.get("test_count", None))
-        name = str(request.POST.get("name", ' '))
-        start = int(request.POST.get("start", None))
-        types = request.POST.get("types", None)
-        Help2=request.POST.get("help",None)
+        if request.method == "POST":
+            rows = int(request.POST.get("rows", None))
+            tyype = request.POST.get("tynpe", None)
+            test_count = int(request.POST.get("test_count", None))
+            name = str(request.POST.get("name", ' '))
+            start = int(request.POST.get("start", None))
+            types = request.POST.get("types", None)
+            Help2=request.POST.get("help",None)
+        elif request.method == "GET":
+            pass
         if Help2==None:
             Help={0:0}
         else:
@@ -344,8 +347,6 @@ def main(Help,height, width, buffer, c, types, start, name, test_count, tyype, r
                     k_x_3=0
                     is_last_Number=False
                     is_dot=False
-                    # print(line)
-                    print(list(line)[25:58])#=='   ')#list(line).index(k)-38]=='ا')
                     for k in line:
                         reshaped_text = arabic_reshaper.reshape(str('جواب نهایی'))
                         final_text = get_display(reshaped_text)
