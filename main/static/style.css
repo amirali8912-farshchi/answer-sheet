@@ -107,6 +107,7 @@ body {
 /* ===== صفحه دوم ===== */
 .form,
 .callme,
+.last-choose,
 .help-me {
     overflow-y: scroll;
     width: 82%;
@@ -216,11 +217,13 @@ a {
 }
 
 /* ===== دکمه ===== */
-form button {
+button,
+.sub p,
+.sub {
     border-radius: 10px;
     font-size: x-large;
-    width: 50%;
-    height: 10%;
+    /* width: 50%;
+    height: 10%; */
     cursor: pointer;
     padding: 0.375rem;
     background-color: var(--btn-bg);
@@ -316,6 +319,7 @@ h1 {
 
     .form,
     .callme,
+    .last-choose,
     .help-me,
     .main {
         width: 97vw;

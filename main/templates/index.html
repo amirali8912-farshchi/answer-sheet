@@ -62,12 +62,17 @@
                     code</a>
             </div>
         </section>
+        <section class="hidden last-choose">
+            <button>فایل چاپی</button>
+            <button>فایل استفاده</button>
+        </section>
         <form id="sub" style="align-items: center;" enctype="multipart/form-data" class="form" action="/generate/"
             method="post">
             {% csrf_token %}
             <div class="header">
                 <h1>پاس ساز <br> فرم پاسخبرگ ساز</h1>
             </div>
+            <input type="hidden" name="mode" value="{0:0}" id="hidden-last">
 
             <div class="input">
                 <label for="start_test">: شروع تست ها </label>
@@ -82,7 +87,7 @@
                 <input type="text" class="input_tag" name="name" id="watermark">
             </div>
             <div class="input hidden helper">
-                <input type="hidden" name="help" id="HiddenInput">
+                <input type="hidden" name="help" value="{0:0}" id="HiddenInput">
                 <label class="" for="helper">: زیر بخش ها </label>
                 <div class="helperin" id="helper">
                     <div class="input">
@@ -124,8 +129,9 @@
                 </div>
             </div>
 
-
-            <button type="submit">ساخت پاسخبرگ</button>
+            <div class="sub">
+                <button type="submit">ساخت پاسخبرگ</button>
+            </div>
         </form>
     </section>
     <script src="{% static 'main.js' %}"></script>

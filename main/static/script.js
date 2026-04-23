@@ -16,7 +16,10 @@ const Radio_tag_2 = document.getElementById('two');
 const HelperPlus = document.getElementById('helper_plus');
 const helper = document.getElementById('helper');
 const sub = document.getElementById('sub');
+const sub_button = document.getElementsByClassName('sub')[0];
+const last_choose = document.getElementsByClassName('last-choose')[0];
 const HiddenInput = document.getElementById('HiddenInput')
+const hidden_last = document.getElementById('hidden-last')
 
 function hidden(clas, dis) {
     let tag = document.querySelectorAll(`.${clas}`)
@@ -120,6 +123,7 @@ RadioTags_tyype.addEventListener('click', () => {
 
         RadioTags_tyype.children[1].children[0].children[1].style.background = 'var(--radio-bg)'
         RadioTags_tyype.children[1].children[0].children[1].style.color = 'var(--text)'
+        sub_button.innerHTML = '<button type="submit"> ساخت پاسخبرگ</button>'
     } else if (Radio_tag_2.checked == true) {
         RadioTags_tyype.children[0].children[0].children[1].style.background = 'var(--radio-bg)'
         RadioTags_tyype.children[0].children[0].children[1].style.color = 'var(--text)'
@@ -132,9 +136,23 @@ RadioTags_tyype.addEventListener('click', () => {
             document.getElementsByClassName('helper')[0].style.height = `15vh`;
 
         }
+        if (Radio_tag_2.value == 'Standard') {
+            sub_button.innerHTML = '<p id="sub_button"> ساخت پاسخبرگ</p>'
+            const sub_main_button = document.getElementById('sub_button');
+            sub_main_button.addEventListener('click', () => {
+                hidden('form', 'none');
+                hidden('last-choose', 'flex');
+            })
+        } else {
+            sub_button.innerHTML = '<button type="submit"> ساخت پاسخبرگ</button>'
+        }
+
     }
 
 });
+
+last_choose.children[0].addEventListener('click', () => { hidden_last.value = 'pdf'; let help = { 0: 0 }; HiddenInput.value = JSON.stringify(help); sub.submit() })
+last_choose.children[1].addEventListener('click', () => { hidden_last.value = 'html'; let help = { 0: 0 }; HiddenInput.value = JSON.stringify(help); sub.submit() })
 // extra helpers
 let height = 15;
 HelperPlus.addEventListener('click', () => {
@@ -155,7 +173,7 @@ sub.addEventListener('submit', (e) => {
     const helpertags2 = document.getElementsByClassName('helper_input_tag_2')
 
 
-    let help = {};
+    let help = { 0: 0 };
 
     for (let i = 0; i < helpertags1.length; i++) {
         help[helpertags1[i].value] = helpertags2[i].value;

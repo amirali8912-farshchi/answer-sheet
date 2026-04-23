@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .selected {
+            background-color: #b2e0f7;
+            border-radius: 10px;
+        }
+
+        .bi-arrow-up::before {
+            content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktYXJyb3ctdXAiIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOCAxNWEuNS41IDAgMCAwIC41LS41VjIuNzA3bDMuMTQ2IDMuMTQ3YS41LjUgMCAwIDAgLjcwOC0uNzA4bC00LTRhLjUuNSAwIDAgMC0uNzA4IDBsLTQgNGEuNS41IDAgMSAwIC43MDguNzA4TDcuNSAyLjcwN1YxNC41YS41LjUgMCAwIDAgLjUuNSIvPgo8L3N2Zz4=");
+        }
+
+        .bi-arrow-down::before {
+            content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktYXJyb3ctZG93biIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04IDFhLjUuNSAwIDAgMSAuNS41djExLjc5M2wzLjE0Ni0zLjE0N2EuNS41IDAgMCAxIC43MDguNzA4bC00IDRhLjUuNSAwIDAgMS0uNzA4IDBsLTQtNGEuNS41IDAgMCAxIC43MDgtLjcwOEw3LjUgMTMuMjkzVjEuNUEuNS41IDAgMCAxIDggMSIvPgo8L3N2Zz4=");
+        }
+
+        body {
+            background-color: rgb(199, 196, 196);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 67rem;
+
+
+        }
+
+        .circle {
+            height: 26px;
+            width: 26px;
+            background-color: black;
+            border-radius: 50%;
+
+        }
+
+        input {
+            display: none;
+        }
+
+        .space {
+            height: 2rem;
+            width: 60rem;
+        }
+
+        .first-tamplate {
+
+            margin-bottom: 26rem;
+            box-shadow: 0 0 0 1rem white;
+            background-color: white;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            padding-bottom: 2rem;
+            align-items: start;
+            width: 60rem;
+            height: 66rem;
+            border: 3.5px solid black;
+        }
+
+        .test {
+            padding-left: 0.125rem;
+            padding-top: 1rem;
+        }
+
+        .sas {
+            cursor: pointer;
+            font-size: 1rem;
+            position: fixed;
+            bottom: 10vh;
+            width: 3.5rem;
+            left: 3.3vw;
+            border: 5px solid #9ACD32;
+            background-color: #a182e1;
+            height: 3.5rem;
+            border-radius: 50%;
+        }
+
+        .sas1 {
+            cursor: pointer;
+            font-size: 0.755rem;
+            position: fixed;
+            bottom: 22vh;
+            width: 3.5rem;
+            left: 3.3vw;
+            background-color: #a182e1;
+            border: 5px solid #9ACD32;
+            height: 3.5rem;
+            border-radius: 50%;
+        }
+
+        label {
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        input:checked+label {
+            height: 24px;
+            width: 26px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        .main-test div {
+            height: 1rem;
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        .main-test {
+            padding-top: 0.25rem;
+            padding-bottom: 0rem;
+            height: 40px;
+            display: flex;
+            padding-right: 83px;
+            justify-content: space-around;
+            flex-direction: row;
+            width: 150px;
+            font-size: 25px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .black_box {
+            border: 2px solid black;
+            margin-top: 2rem;
+            margin-left: 2rem;
+            padding-left: 2rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-radius: 35px;
+        }
+
+        .keyboard {
+            position: fixed;
+            bottom: 10vh;
+            right: 3.3vw;
+            display: none;
+            width: 18rem;
+            height: 2.5rem;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .keyboard div {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            height: 2.5rem;
+            width: 2.5rem;
+            font-size: 1.2rem;
+            text-align: center;
+            border: 5px solid #9ACD32;
+            border-radius: 20px;
+            background-color: #a182e1;
+        }
+    </style>
+</head>
+
+<body style="--nfp:{{nfp | safe}}">
+    <div class="keyboard">
+        <div id="1">1</div>
+        <div id="2">2</div>
+        <div id="3">3</div>
+        <div id="4">4</div>
+        <div id="a-up"> <i class="bi-arrow-up"></i></div>
+        <div id="a-down"> <i class="bi-arrow-down"></i></div>
+    </div>
+    <p class="hidden" id="memory"></p>
+    <div id="data">
+
+    </div>
+    <button class="sas1">مشاهده کیبورد</button>
+    <script type="text/javascript">
+        document.getElementById('data').innerHTML = `{{ res | safe}}`
+        console.log()
+
+    </script>
+    <script type="text/javascript">
+        let TestElements = document.getElementsByClassName('main-test')
+        let sas1 = document.getElementsByClassName('sas1')[0];
+        let one = document.getElementById('1')
+        let two = document.getElementById('2')
+        let three = document.getElementById('3')
+        let four = document.getElementById('4')
+        let arrow_down = document.getElementById('a-up')
+        let arrow_up = document.getElementById('a-down')
+        let key = document.getElementsByClassName('keyboard')[0];
+        let memory = document.getElementById('memory')
+        let q = -1
+        let save = {}
+
+        function downloadHTML(elementSelector = 'body', outputFilename = 'page-content.html') {
+
+            // 1. گرفتن المان مورد نظر
+            const element = document.querySelector(elementSelector);
+            if (!element) {
+                console.error("Element not found!");
+                return;
+            }
+
+            // 2. گرفتن HTML المان
+            let htmlContent = element.outerHTML;
+
+            // 3. گرفتن استایل‌های سراسری صفحه (که ممکنه روی المان انتخابی تاثیر بذارن)
+            const styles = document.head.querySelectorAll('style');
+            let cssString = '';
+            styles.forEach(style => {
+                cssString += style.outerHTML;
+            });
+
+            // 4. گرفتن لینک‌های CSS خارجی (اگر وجود دارند)
+            const linkTags = document.head.querySelectorAll('link[rel="stylesheet"]');
+            let cssLinks = '';
+            linkTags.forEach(link => {
+                // اینجا می‌تونیم لینک رو هم داخل تگ style کپی کنیم، ولی برای آفلاین بودن باید خود CSS رو دانلود کنیم.
+                // برای سادگی الان فقط تگش رو نگه می‌داریم، ولی برای آفلاین کامل باید CSS رو هم inline کرد.
+                cssLinks += link.outerHTML;
+            });
+
+            // 5. ترکیب همه چیز در یک فایل HTML
+            // اینجا مهمه که استایل‌ها قبل از محتوا بیان تا تاثیر بذارن
+            const finalHtml = `
+            < !DOCTYPE html >
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Saved Page Content</title>
+                        ${cssString}
+                        ${cssLinks} <!-- این تگ‌ها برای آفلاین بودن باید با CSS واقعی جایگزین بشن -->
+                    </head>
+                    <body>
+                        ${htmlContent}
+                    </body>
+                </html>
+    `;
+
+            // 6. ساخت فایل blob و لینک دانلود
+            const blob = new Blob([finalHtml], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = outputFilename;
+            document.body.appendChild(link);
+            link.click();
+
+            // پاکسازی
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+        sas1.addEventListener('click', () => { if (sas1.innerHTML == 'مشاهده کیبورد') { key.style.display = 'flex'; sas1.innerHTML = 'پنهان کردن کیبورد'; } else { key.style.display = 'none'; sas1.innerHTML = 'مشاهده کیبورد'; } })
+        // --- نحوه استفاده ---
+
+        // اگر می‌خوای کل صفحه ذخیره بشه:
+        // savePageAsSingleHtml();
+
+        // اگر می‌خوای فقط یه div خاص (مثلا با id="myForm") ذخیره بشه:
+        // savePageAsSingleHtml('#myForm', 'my-form-content.html');
+
+        // حالا دکمه‌ای که قبلا داشتیم رو تغییر می‌دیم:
+        // <button onclick="savePageAsSingleHtml()">دانلود محتوای صفحه به صورت HTML</button>
+        // یا برای یک بخش خاص:
+        // <button onclick="savePageAsSingleHtml('#myForm', 'my-form-content.html')">دانلود فرم من</button>
+        function handlekey(event) {
+
+            if (event.key == 'ArrowUp') {
+                q -= 1
+            }
+            if (q > TestElements.length) {
+                alert("تستها پایان یافتند")
+                return
+            }
+            console.log(event)
+            const pressedkey = event.key
+            if (pressedkey == 'ArrowDown') {
+                q += 1
+                save[q] = 0
+            } if (pressedkey == 1) {
+                q += 1
+                save[q] = 1
+                console.log(TestElements[q].children[1].children[0]);
+                TestElements[q].children[1].children[0].checked = true
+            } if (pressedkey == 2) {
+                q += 1
+                save[q] = 2
+                console.log(TestElements[q].children[1].children[0]);
+                TestElements[q].children[2].children[0].checked = true
+            } if (pressedkey == 3) {
+                q += 1
+                save[q] = 2
+                console.log(TestElements[q].children[1].children[0]);
+                TestElements[q].children[3].children[0].checked = true
+            } if (pressedkey == 4) {
+                q += 1
+                save[q] = 4
+                console.log(TestElements[q].children[1].children[0]);
+                TestElements[q].children[4].children[0].checked = true
+            }
+            TestElements[q + 1].className = 'main-test selected'
+            if (q != -1) {
+                TestElements[q].className = 'main-test'
+            }
+            TestElements[q + 2].className = 'main-test'
+            memory.innerHTML = JSON.stringify(save)
+
+        };
+
+        one.addEventListener("click", () => { handlekey({ key: '1' }) })
+        two.addEventListener("click", () => { handlekey({ key: '2' }) })
+        three.addEventListener("click", () => { handlekey({ key: '3' }) })
+        four.addEventListener("click", () => { handlekey({ key: '4' }) })
+        arrow_up.addEventListener("click", () => { handlekey({ key: 'ArrowDown' }) })
+        arrow_down.addEventListener("click", () => { handlekey({ key: 'ArrowUp' }) })
+        document.addEventListener('keydown', handlekey);
+
+
+    </script>
+    <button class="sas" onclick="downloadHTML()">ذخیره</button>
+
+
+</body>
+
+</html>
