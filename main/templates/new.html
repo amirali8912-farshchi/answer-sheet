@@ -91,6 +91,18 @@
             height: 3.5rem;
             border-radius: 50%;
         }
+        .sas2 {
+            cursor: pointer;
+            font-size: 0.755rem;
+            position: fixed;
+            bottom: 22vh;
+            width: 3.5rem;
+            left: 3.3vw;
+            background-color: #a182e1;
+            border: 5px solid #9ACD32;
+            height: 3.5rem;
+            border-radius: 50%;
+        }
 
         label {
             z-index: 2;
@@ -174,11 +186,20 @@
         <div id="a-up"> <i class="bi-arrow-up"></i></div>
         <div id="a-down"> <i class="bi-arrow-down"></i></div>
     </div>
+    <div class="keyboard">
+        <div id="red">1</div>
+        <div id="green">2</div>
+        <div id="blue">3</div>
+        <div id="4">4</div>
+        <div id="a-up"> <i class="bi-arrow-up"></i></div>
+        <div id="a-down"> <i class="bi-arrow-down"></i></div>
+    </div>
     <p class="hidden" id="memory"></p>
     <div id="data">
 
     </div>
     <button class="sas1">مشاهده کیبورد</button>
+    <button class="sas2">تغییر رنگ</button>
     <script type="text/javascript">
         document.getElementById('data').innerHTML = `{{ res | safe}}`
         console.log()
